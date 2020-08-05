@@ -1,0 +1,23 @@
+/* CSS specific to 'Get Involved' page. Works with main stylesheet */
+
+/* Controls the background color of the section of the website with the title and carousel, sets border radius */
+.top_background_home {
+  background-color: #40b6bd;
+  border-radius: 5px;
+}
+
+/* Controls the background color of the rest of the webpage (not containing text) */
+.bottom_background_home {
+  background-color: #8ad4d8;
+}
+
+/* Controls the background color of the navigation buttons */
+nav ul li a {
+  background-color: #b2dbdd;
+}
+
+/* Selects background and border colors for .navbar, which are used in style.css since bootstrap classes cannot be accessed from other css files */
+:root {
+  --backgroundvar: #2b2b2b;
+  --bordervar: #2b2b2b;
+}

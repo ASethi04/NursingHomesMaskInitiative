@@ -1,0 +1,25 @@
+input[type=text], input[type=password]
+{   
+        width: 50%;   
+        margin: auto;  
+        box-sizing: border-box;
+}  
+
+ button:hover
+{   
+        opacity: 0.7;   
+}       
+
+#formdiv input, #formdiv label {
+      margin-left: 25%;
+}
+
+#formdiv button 
+{   
+    background-color: #4CAF50;   
+    cursor: pointer;   
+    margin-left: 35%;
+    padding: 2%;
+    width: 70%;
+}   
+   
