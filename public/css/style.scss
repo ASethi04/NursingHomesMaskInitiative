@@ -1,0 +1,2298 @@
+/*
+* Table of Contents * 
+1. Variables
+    1.1 Colors 
+    1.2 Font Weights
+2. Home page
+    2.1 Navigation Bar
+    2.2 Hero 
+    2.3 Our Mission
+    2.4 Get Involved
+    2.5 Footer
+3. About Page
+    3.1 About Us 
+    3.2 Our Team
+    3.3 Why We Care
+    3.4 Footer Main
+4. Participate Page
+    4.1 Find Locations
+    4.2 Enter Zip
+    4.3 Table of Nursing Homes
+5. Resources Page
+    5.1 Resources
+    5.2 Information
+    5.3 Videos
+    5.4 Other Information
+    5.5 Other Mask Groups
+6. Donate Page
+    6.1 Donate
+    6.2 Organizations
+    6.3 Donating Information
+7. Contact Page
+    7.1 Contact Title
+    7.2 Contact Form
+
+*/
+
+// * Variables * //
+
+// Colors
+$darkerTextPurple: #411c63;
+$darkTextPurple: #4b2073;
+$normalTextPurple: #6c33a0;
+$normalTextBlue: #2e3174;
+$mainSectionPurple: #fde3ff;
+$lighterSectionPurple: #fff6ff;
+$navBarPurple: #fde3ff;
+
+// Font Weights
+$thin: 100;
+$light: 300;
+$regular: 400;
+$bold: 700;
+$black: 900;
+
+//Other
+$textShadowDark: 0px -7px 0px rgba(251, 210, 255, 0.8);
+$textShadowLight: 0px -7px 0px rgba(251, 210, 255, 0.4);
+$svgFilter: invert(15%) sepia(16%) saturate(6307%) hue-rotate(249deg)
+    brightness(94%) contrast(101%);
+
+//All elements stuff
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    background-color: $mainSectionPurple;
+    line-height: 1.5;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: $lighterSectionPurple;
+    background: $darkerTextPurple;
+}
+
+::selection {
+    color: $lighterSectionPurple;
+    background: $darkerTextPurple;
+}
+
+*:focus {
+    outline: none;
+}
+
+// ! --------- ! //
+// ! HOME PAGE ! //
+// ! --------- ! //
+
+// * Navigation Bar * //
+.nav {
+    transition: padding 150ms ease-in, border-bottom 150ms ease-in;
+    border-bottom: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 1em 0em;
+    background: rgba($navBarPurple, 0.95);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 8vh;
+
+    &__logo {
+        width: 125px;
+    }
+
+    &__links {
+        display: flex;
+        justify-content: space-around;
+        width: 60%;
+
+        li {
+            list-style: none;
+
+            a {
+                position: relative;
+                padding-bottom: 0.25rem;
+                letter-spacing: 1px;
+                font-weight: $regular;
+                color: $normalTextPurple;
+                text-decoration: none;
+                font-size: 1.3rem;
+            }
+
+            a::after {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                border-radius: 0.3rem;
+                background: rgba($normalTextPurple, 0.8);
+                content: "";
+                opacity: 0;
+                -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+                -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+                transition: opacity 0.3s, transform 0.3s;
+                -webkit-transform: translateY(10px);
+                -moz-transform: translateY(10px);
+                transform: translateY(10px);
+            }
+
+            a.not-active:hover::after,
+            a.not-active:focus::after {
+                outline: none;
+                opacity: 0.5;
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                transform: translateY(0px);
+            }
+
+            .active::after {
+                opacity: 1;
+                -webkit-transform: translateY(0px);
+                -moz-transform: translateY(0px);
+                transform: translateY(0px);
+            }
+        }
+    }
+
+    .menu {
+        font-size: 1.3rem;
+        color: $normalTextPurple;
+        display: none;
+        cursor: pointer;
+        margin-right: 1em;
+    }
+}
+
+.scrolling {
+    padding: 0.2rem 0;
+    border-bottom: 2px solid #f3d5ed;
+    transition: padding 200ms ease-out, border-bottom 200ms ease-out;
+}
+
+@media screen and (min-width: 1275px) {
+    .nav__links {
+        li {
+            a {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .nav__links {
+        width: 70%;
+        li {
+            a {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 786px) {
+    body {
+        overflow-x: hidden;
+    }
+    .nav {
+        &__links {
+            position: absolute;
+            right: 0;
+            height: 92vh;
+            top: 8vh;
+            background-color: rgba($navBarPurple, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            transform: translateX(100%);
+            transition: transform 500ms ease-in;
+
+            li {
+                opacity: 0;
+                a {
+                    font-weight: $regular;
+                    font-size: 1.3rem;
+                }
+            }
+        }
+
+        .menu {
+            display: block;
+        }
+    }
+
+    ul.nav__links.nav--active {
+        transform: translateX(0%);
+        padding-bottom: 1em;
+    }
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+// * Hero * //
+.hero {
+    z-index: 1;
+    position: relative;
+    margin-top: 6rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url("../img/old-women-mask.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: scroll;
+    height: 67vh;
+    min-height: 400px;
+    color: white;
+    text-align: center;
+
+    &__textContainer {
+        position: absolute;
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &_title {
+            padding: 1.5rem 1.5rem 0;
+            font-size: 2em;
+        }
+
+        &_text {
+            padding: 1.5rem 1.5rem 0;
+            font-size: 1.5em;
+
+            &-bold {
+                font-weight: $bold;
+            }
+        }
+    }
+    &__btn {
+        display: inline-block;
+        width: 15rem;
+        padding: 0.2rem 0;
+        color: #fff;
+        border: 0.2rem solid white;
+        text-align: center;
+        outline: none;
+        text-decoration: none;
+        cursor: pointer;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 80%;
+        border-radius: 3rem;
+        transition: background-color 200ms ease-out, color 200ms ease-out;
+        font-size: 2.1rem;
+    }
+
+    &__btn:hover,
+    &__btn:focus,
+    &__btn:active {
+        background-color: white;
+        color: $darkTextPurple;
+        transition: background-color 300ms ease-in, color 300ms ease-in;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .hero {
+        background-attachment: scroll;
+        height: 69vh;
+
+        &__textContainer {
+            width: 90%;
+
+            &_title {
+                padding: 2rem 1.5rem 0;
+                font-size: 2.4em;
+            }
+
+            &_text {
+                font-size: 1.8em;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 825px) {
+    .hero {
+        height: 69vh;
+        background-attachment: scroll;
+
+        &__textContainer {
+            width: 78%;
+
+            &_title {
+                padding: 2rem 1.5rem 0;
+                font-size: 2.8em;
+            }
+
+            &_text {
+                font-size: 2.2em;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .hero {
+        height: 73vh;
+        background-attachment: fixed;
+
+        &__textContainer {
+            width: 55%;
+
+            &_title {
+                padding: 2rem 1.5rem 0;
+                font-size: 3em;
+            }
+
+            &_text {
+                margin: inherit 1.5rem;
+                font-size: 2.4em;
+            }
+        }
+
+        &__btn {
+            width: 20rem;
+            font-size: 2.6rem;
+        }
+    }
+}
+
+// * Arrow * //
+.arrow {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 4rem;
+    text-align: center;
+    margin-top: 1rem;
+    color: $darkTextPurple;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    &__text {
+        font-weight: $light;
+        align-self: center;
+    }
+
+    &__svg {
+        align-self: center;
+    }
+}
+
+// * Our Mission * //
+.ourMission {
+    color: $darkerTextPurple;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+
+    &__title {
+        padding-top: 2rem;
+        font-size: 2.5rem;
+        font-weight: $black;
+        text-shadow: $textShadowDark;
+    }
+
+    &__text {
+        padding-top: 0.4rem;
+        padding-bottom: 1em;
+        font-size: 1.3rem;
+        font-weight: $regular;
+        color: $darkTextPurple;
+    }
+}
+
+@media screen and (min-width: 825px) {
+    .main-home {
+        .ourMission {
+            width: 80%;
+
+            &__title {
+                font-size: 2.9rem;
+            }
+            &__text {
+                font-size: 1.7rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-home {
+        .ourMission {
+            width: 65%;
+
+            &__title {
+                font-size: 3.3rem;
+            }
+            &__text {
+                font-size: 2rem;
+            }
+        }
+    }
+}
+
+// * Get Involved * //
+.getInvolvedTitle {
+    padding-top: 1rem;
+    font-size: 2.5rem;
+    font-weight: $black;
+    text-shadow: $textShadowLight;
+    background: $lighterSectionPurple;
+    text-align: center;
+    color: $darkerTextPurple;
+}
+
+.getInvolved {
+    padding-bottom: 2rem;
+    color: $darkTextPurple;
+    background: $lighterSectionPurple;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+
+    &__donate {
+        padding-top: 1rem;
+        margin: 0 auto;
+
+        &_image {
+            filter: $svgFilter;
+            width: 11rem;
+        }
+        &_button {
+            letter-spacing: 0.5px;
+            font-family: inherit;
+            display: inline-block;
+            width: 95%;
+            padding: 0.2rem 0;
+            color: #6c33a0;
+            border: 0.2rem solid #6c33a0;
+            text-align: center;
+            outline: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 3rem;
+            transition: background-color 200ms ease-out, color 200ms ease-out,
+                transform 200ms ease-out;
+            font-size: 2.1rem;
+            background: none;
+            margin-top: 0.5rem;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(0px);
+        }
+
+        &_button:hover,
+        &_button:focus,
+        &_button:active {
+            background-color: $normalTextPurple;
+            color: $lighterSectionPurple;
+            transition: background-color 300ms ease-in, color 300ms ease-in,
+                transform 300ms ease-in;
+            transform: translateY(-0.2rem);
+        }
+    }
+
+    &__sew {
+        padding-top: 1rem;
+        margin: 0 auto;
+
+        &_image {
+            filter: $svgFilter;
+            width: 11rem;
+        }
+
+        &_button {
+            letter-spacing: 0.5px;
+            font-family: inherit;
+            display: inline-block;
+            width: 95%;
+            padding: 0.2rem 0;
+            color: #6c33a0;
+            border: 0.2rem solid #6c33a0;
+            text-align: center;
+            outline: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 3rem;
+            transition: background-color 200ms ease-out, color 200ms ease-out,
+                transform 200ms ease-out;
+            font-size: 2.1rem;
+            background: none;
+            margin-top: 0.5rem;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(0px);
+        }
+
+        &_button:hover,
+        &_button:focus,
+        &_button:active {
+            background-color: $normalTextPurple;
+            color: $lighterSectionPurple;
+            transition: background-color 300ms ease-in, color 300ms ease-in,
+                transform 300ms ease-in;
+            transform: translateY(-0.2rem);
+        }
+    }
+
+    &__learn {
+        padding-top: 2em;
+        margin: 0 auto;
+
+        &_image {
+            filter: $svgFilter;
+            width: 11rem;
+        }
+
+        &_button {
+            letter-spacing: 0.5px;
+            font-family: inherit;
+            display: inline-block;
+            width: 95%;
+            padding: 0.2rem 0;
+            color: #6c33a0;
+            border: 0.2rem solid #6c33a0;
+            text-align: center;
+            outline: none;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 3rem;
+            transition: background-color 200ms ease-out, color 200ms ease-out,
+                transform 200ms ease-out;
+            font-size: 2.1rem;
+            background: none;
+            margin-top: 0.5rem;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(0px);
+        }
+
+        &_button:hover,
+        &_button:focus,
+        &_button:active {
+            background-color: $normalTextPurple;
+            color: $lighterSectionPurple;
+            transition: background-color 300ms ease-in, color 300ms ease-in,
+                transform 300ms ease-in;
+            transform: translateY(-0.2rem);
+        }
+    }
+}
+
+@media screen and (min-width: 825px) {
+    .getInvolvedTitle {
+        font-size: 2.9rem;
+    }
+    .getInvolved {
+        flex-direction: row;
+    }
+    .getInvolved__learn {
+        padding-top: 1em;
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .getInvolvedTitle {
+        font-size: 3.4rem;
+    }
+}
+
+// * Footer * //
+.footer {
+    padding: 1rem 0;
+    text-align: center;
+    color: $darkerTextPurple;
+    background-color: $lighterSectionPurple;
+    &__title {
+        font-size: 2rem;
+    }
+    &__svg {
+        display: none; //! Change to flex when able to
+        justify-content: center;
+        &_instagram {
+            filter: $svgFilter;
+            width: 4rem;
+            margin: 1.5em;
+            transform: translateY(0);
+            transition: transform 100ms ease-in;
+        }
+        &_twitter {
+            filter: $svgFilter;
+            width: 4rem;
+            margin: 1.5em;
+            transform: translateY(0);
+            transition: transform 100ms ease-in;
+        }
+        &_facebook {
+            filter: $svgFilter;
+            width: 4rem;
+            margin: 1.5em;
+            transform: translateY(0) scale(1);
+            transition: transform 100ms ease-in;
+        }
+
+        &_instagram:hover,
+        &_instagram:focus,
+        &_twitter:hover,
+        &_twitter:focus,
+        &_facebook:hover,
+        &_facebook:focus {
+            transform: translateY(-0.2rem) scale(1.1);
+            transition: transform 150ms ease-out;
+        }
+    }
+}
+
+// ! ---------- ! //
+// ! ABOUT PAGE ! //
+// ! ---------- ! //
+
+// * About Us * //
+.aboutUs {
+    color: $darkTextPurple;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas:
+        "title"
+        "text";
+    place-items: center center;
+    padding: 2rem 0;
+    grid-column-gap: 2.5rem;
+    margin-top: 4rem;
+    &__title {
+        margin-bottom: 0.5rem;
+        grid-area: title;
+        font-size: 2.5rem;
+        font-weight: $black;
+        color: $darkerTextPurple;
+        text-shadow: $textShadowDark;
+    }
+
+    &__text {
+        padding-top: 0.2rem;
+        grid-area: text;
+        font-size: 1.3rem;
+        font-weight: $regular;
+    }
+
+    &__image {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 825px) {
+    .main-about {
+        .aboutUs {
+            width: 80%;
+
+            &__title {
+                font-size: 2.9rem;
+            }
+            &__text {
+                font-size: 1.7rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-about {
+        .aboutUs {
+            grid-template-areas:
+                "title image"
+                "text image";
+
+            &__title {
+                font-size: 3.1rem;
+            }
+            &__image {
+                grid-area: image;
+                width: 20rem;
+                border-radius: 1rem;
+                grid-area: image;
+                display: block;
+                margin-left: 1rem;
+            }
+        }
+    }
+}
+
+// * Our Team * //
+.container {
+    background-color: $lighterSectionPurple;
+}
+.ourTeam {
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    width: 90%;
+    margin: 0 auto;
+    color: $darkTextPurple;
+
+    &__title {
+        font-size: 2.5rem;
+        font-weight: $black;
+        text-shadow: $textShadowLight;
+        text-align: center;
+        color: $darkerTextPurple;
+    }
+
+    &__person {
+        padding-bottom: 2.5rem;
+        &_container {
+            display: flex;
+            margin: 0 auto;
+            align-items: center;
+            justify-content: center;
+
+            &-title {
+                font-weight: $bold;
+                font-size: 1.5rem;
+
+                &-school {
+                    padding-top: 0.2rem;
+                    font-weight: $regular;
+                    font-size: 1.1rem;
+                    color: $normalTextPurple;
+                }
+            }
+        }
+        &_paragraph {
+            padding-top: 0.7rem;
+        }
+    }
+}
+
+#lydiaSvg {
+    width: 9rem;
+    margin-left: 0.5rem;
+    margin-right: 10%;
+}
+
+#amishSvg {
+    width: 9rem;
+    margin-left: 0.5rem;
+    margin-right: 10%;
+}
+
+#justinSvg {
+    width: 10rem;
+    margin-left: 0.5rem;
+    margin-right: 9%;
+}
+
+@media screen and (min-width: 500px) and (max-width: 824px) {
+    .main-about {
+        .ourTeam {
+            &__person {
+                &_container {
+                    &-title {
+                        font-size: 2rem;
+                        &-school {
+                            font-size: 1.3rem;
+                        }
+                    }
+                }
+                &_paragraph {
+                    font-size: 1.05rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-about {
+        .ourTeam {
+            &__title {
+                font-size: 2.9rem;
+            }
+            a &__person {
+                &_container {
+                    &-title {
+                        font-size: 2.3rem;
+                        &-school {
+                            font-size: 1.4rem;
+                        }
+                    }
+                }
+                &_paragraph {
+                    font-size: 1.2rem;
+                    width: 90%;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    body {
+        .main-about {
+            .ourTeam {
+                &__title {
+                    font-size: 3.1rem;
+                }
+
+                &__person {
+                    &_container {
+                        &-title {
+                            font-size: 2.6rem;
+                            &-school {
+                                font-size: 1.7rem;
+                            }
+                        }
+                    }
+                    &_paragraph {
+                        font-size: 1.3rem;
+                        width: 80%;
+                        margin: 0 auto;
+                    }
+                }
+            }
+        }
+    }
+
+    #lydiaSvg {
+        margin-left: -4.5rem;
+    }
+}
+
+// * Why We Care * //
+.whyWeCare {
+    width: 90%;
+    color: $darkTextPurple;
+    margin: 0 auto;
+    padding: 1rem 0;
+    &__title {
+        color: $darkerTextPurple;
+        font-size: 2.3rem;
+        font-weight: $black;
+    }
+
+    &__paragraphOne {
+        padding-left: 0.5rem;
+        padding-top: 0.2rem;
+        font-size: 1.2rem;
+    }
+
+    &__nursingHome {
+        padding-top: 0.5rem;
+        font-weight: $bold;
+        font-size: 1.5rem;
+    }
+
+    &__paragraphTwo {
+        padding-left: 0.5rem;
+        padding-top: 0.2rem;
+        font-size: 1.1rem;
+        span {
+            display: block;
+            padding-top: 0.5rem;
+
+            a {
+                color: $normalTextBlue;
+            }
+
+            a::before {
+                text-decoration: underline;
+                position: absolute;
+                content: attr(data-content);
+                clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%);
+                transition: clip-path 275ms ease;
+            }
+            a:hover::before {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-about {
+        .whyWeCare {
+            &__title {
+                font-size: 2.6rem;
+            }
+            &__paragraphOne {
+                padding-left: 1rem;
+                font-size: 1.4rem;
+            }
+            &__nursingHome {
+                font-size: 1.8rem;
+            }
+            &__paragraphTwo {
+                padding-left: 1rem;
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-about {
+        .whyWeCare {
+            width: 85%;
+
+            &__title {
+                font-size: 2.9rem;
+            }
+            &__paragraphOne {
+                padding-left: 1rem;
+                font-size: 1.6rem;
+            }
+            &__nursingHome {
+                font-size: 2.1rem;
+            }
+            &__paragraphTwo {
+                padding-left: 1rem;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+
+// * Footer Main * //
+.footerMain {
+    padding: 1rem 0;
+    text-align: center;
+    color: $darkerTextPurple;
+    background-color: $mainSectionPurple;
+    &__title {
+        font-size: 2rem;
+    }
+    &__svg {
+        display: none; //! Change to flex when able to
+        justify-content: center;
+        &_instagram {
+            filter: $svgFilter;
+            width: 4rem;
+            margin: 1.5em;
+            transform: translateY(0);
+            transition: transform 100ms ease-in;
+        }
+        &_twitter {
+            filter: $svgFilter;
+            width: 4rem;
+            margin: 1.5em;
+            transform: translateY(0);
+            transition: transform 100ms ease-in;
+        }
+        &_facebook {
+            filter: $svgFilter;
+            width: 4rem;
+            margin: 1.5em;
+            transform: translateY(0) scale(1);
+            transition: transform 100ms ease-in;
+        }
+
+        &_instagram:hover,
+        &_instagram:focus,
+        &_twitter:hover,
+        &_twitter:focus,
+        &_facebook:hover,
+        &_facebook:focus {
+            transform: translateY(-0.2rem) scale(1.1);
+            transition: transform 150ms ease-out;
+        }
+    }
+}
+
+// ! ---------------- ! //
+// ! PARTICIPATE PAGE ! //
+// ! ---------------- ! //
+// * Find Locations * //
+.findLocations {
+    color: white;
+    background: url("../img/mask_two.jpg");
+    background-repeat: no-repeat;
+    background-position: 60% center;
+    background-size: cover;
+    background-attachment: scroll;
+    height: 75vh;
+    margin-top: 6rem;
+    min-height: 420px;
+    &__content {
+        position: relative;
+        height: 100%;
+        width: 90%;
+        margin: 0 auto;
+
+        &_title {
+            padding-top: 2rem;
+            font-size: 2.6rem;
+            font-weight: $bold;
+        }
+
+        &_text {
+            padding-top: 1rem;
+            font-size: 1.6rem;
+        }
+
+        &_button {
+            color: white;
+            position: absolute;
+            left: 0;
+            top: 80%;
+            display: inline-block;
+            border: 0.2rem solid white;
+            border-radius: 3rem;
+            padding: 0.2rem 0;
+            text-align: center;
+            outline: none;
+            text-decoration: none;
+            cursor: pointer;
+            text-align: center;
+            width: 16rem;
+            font-size: 2.1rem;
+            transition: background-color 200ms ease-out, color 200ms ease-out;
+        }
+
+        &_button:hover,
+        &_button:focus {
+            background-color: white;
+            color: $darkTextPurple;
+            transition: background-color 300ms ease-in, color 300ms ease-in;
+        }
+    }
+}
+
+@media screen and (min-width: 625px) and (max-width: 1275px) {
+    .main-participate {
+        .findLocations {
+            height: 78vh;
+            background-attachment: scroll;
+
+            &__content {
+                width: 70%;
+                margin-left: 5%;
+                &_title {
+                    font-size: 3.1rem;
+                }
+                &_text {
+                    font-size: 1.9rem;
+                }
+                &_button {
+                    top: 75%;
+                    width: 19rem;
+                    font-size: 2.6rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-participate {
+        .findLocations {
+            height: 81vh;
+            background-attachment: fixed;
+
+            &__content {
+                width: 45%;
+                margin-left: 5%;
+                &_title {
+                    font-size: 3.6rem;
+                }
+                &_text {
+                    font-size: 2.2rem;
+                }
+                &_button {
+                    top: 70%;
+                    width: 23rem;
+                    font-size: 3.1rem;
+                }
+            }
+        }
+    }
+}
+
+// * Enter Zip Code * //
+.enterZip {
+    position: relative;
+    padding: 15px 0 0;
+    width: 60%;
+    max-width: 625px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 10vh;
+    font-weight: $bold;
+    &__form {
+        letter-spacing: 1px;
+        font-family: inherit;
+        width: 100%;
+        border: 0;
+        border-bottom: 3px solid $darkerTextPurple;
+        outline: 0;
+        font-size: 1.8rem;
+        color: $darkTextPurple;
+        padding: 7px 0;
+        background: transparent;
+        transition: border-color 0.2s ease-out;
+        position: relative;
+        padding-bottom: 3px;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:placeholder-shown ~ .enterZip__label {
+            font-size: 1.8rem;
+            cursor: text;
+            top: 10px;
+        }
+
+        &:required,
+        &:invalid {
+            box-shadow: none;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: rgba($darkerTextPurple, 1);
+        z-index: -1;
+    }
+
+    &__form:focus {
+        ~ .enterZip__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            color: rgba($darkerTextPurple, 1);
+        }
+        font-weight: $bold;
+        border-width: 3px;
+        border-image: linear-gradient(
+            90deg,
+            rgba(111, 50, 161, 1) 0%,
+            rgba(72, 25, 129, 1) 100%
+        );
+        border-image-slice: 1;
+    }
+
+    &__svg {
+        filter: $svgFilter;
+        width: 2rem;
+        margin-right: 1.2rem;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+@media screen and (min-width: 625px) and (max-width: 1275px) {
+    .main-participate {
+        .enterZip {
+            &__form {
+                font-size: 2.2rem;
+
+                &::placeholder {
+                    color: transparent;
+                }
+
+                &:placeholder-shown ~ .enterZip__label {
+                    font-size: 2.2rem;
+                }
+            }
+
+            &__label {
+                font-size: 1.1rem;
+            }
+
+            &__form:focus {
+                ~ .enterZip__label {
+                    font-size: 1.1rem;
+                }
+            }
+
+            &__svg {
+                width: 2.2rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-participate {
+        .enterZip {
+            &__form {
+                font-size: 2.6rem;
+
+                &::placeholder {
+                    color: transparent;
+                }
+
+                &:placeholder-shown ~ .enterZip__label {
+                    font-size: 2.6rem;
+                }
+            }
+
+            &__label {
+                font-size: 1.1rem;
+            }
+
+            &__form:focus {
+                ~ .enterZip__label {
+                    font-size: 1.1rem;
+                }
+            }
+
+            &__svg {
+                width: 2.2rem;
+            }
+        }
+    }
+}
+
+// * Table of Nursing Homes * //
+.table-container {
+    margin: 1rem;
+    -moz-border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border-radius: 1rem;
+    background: #f6cafa;
+}
+
+thead {
+    color: $darkerTextPurple;
+    font-size: 1.1rem;
+}
+
+tbody {
+    -moz-border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border-radius: 1rem;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #fcd6ff;
+}
+
+table {
+    margin-top: 2rem;
+    -moz-border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border-radius: 1rem;
+    color: $darkTextPurple;
+    border-collapse: collapse;
+    border-style: none;
+    text-align: left;
+    width: 100%;
+}
+table tr {
+    background: none;
+    border-bottom: 2px solid $darkerTextPurple;
+}
+
+table tbody tr:nth-last-child(1) {
+    border-bottom: none;
+}
+
+table th,
+table td {
+    padding: 10px 20px;
+}
+
+#nursingHomeTab {
+    letter-spacing: 1px;
+    background: $mainSectionPurple;
+    color: $darkerTextPurple;
+    display: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 5px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 0.1rem;
+    border-bottom-left-radius: 0.1rem;
+    border-bottom-right-radius: 0.1rem;
+}
+
+table td span {
+    letter-spacing: 1px;
+    background: $mainSectionPurple;
+    color: $darkerTextPurple;
+    display: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 5px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 1px;
+    left: 1px;
+    border-top-left-radius: 0.1rem;
+    border-top-right-radius: 0.1rem;
+    border-bottom-left-radius: 0.1rem;
+    border-bottom-right-radius: 0.1rem;
+}
+
+.alert {
+    position: relative;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline-block;
+}
+
+a::before {
+    text-decoration: underline;
+    position: absolute;
+    content: attr(data-content);
+    clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%);
+    transition: clip-path 275ms ease;
+}
+a:hover::before {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.donate-button {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    color: #fff;
+    border: none;
+    background-color: $normalTextPurple;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4rem;
+    transition: background-color 200ms ease-out;
+    font-size: 1rem;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 150px;
+}
+
+.donate-button:hover,
+.donate-button:focus,
+.donate-button:active {
+    background-color: $darkTextPurple;
+    transition: background-color 300ms ease-in;
+}
+
+@media screen and (max-width: 1275px) and (min-width: 825px) {
+    .table-container {
+        margin: 1rem;
+        -moz-border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        border-radius: 1rem;
+        background: none;
+    }
+
+    tbody tr {
+        background-color: #fcd6ff;
+        -moz-border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        border-radius: 1rem;
+    }
+
+    table thead {
+        left: -9999px;
+        position: absolute;
+        visibility: hidden;
+    }
+    table tr {
+        font-size: 1.3rem;
+        border-bottom: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+        border: 2px solid $darkerTextPurple;
+    }
+    table td {
+        padding-top: 35px;
+        position: relative;
+        width: 50%;
+    }
+    table td span {
+        display: block;
+    }
+    table tbody tr:nth-last-child(1) {
+        border-bottom: 2px solid $darkerTextPurple;
+    }
+    #nursingHomeTab {
+        display: block;
+    }
+
+    table tbody tr td:nth-child(1),
+    table tbody tr td:nth-child(2),
+    table tbody tr td:nth-child(3),
+    table tbody tr td:nth-child(4),
+    table tbody tr td:nth-child(5),
+    table tbody tr td:nth-child(6) {
+        border-bottom: 2px solid $darkerTextPurple;
+    }
+
+    table tbody tr td:nth-child(odd) {
+        border-right: 2px solid $darkerTextPurple;
+    }
+}
+
+@media screen and (max-width: 825px) {
+    .table-container {
+        margin: 1rem;
+        -moz-border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        border-radius: 1rem;
+        background: none;
+    }
+
+    tbody tr {
+        background-color: #fcd6ff;
+        -moz-border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        border-radius: 1rem;
+    }
+
+    table thead {
+        left: -9999px;
+        position: absolute;
+        visibility: hidden;
+    }
+    table tr {
+        font-size: 1.1rem;
+        border-bottom: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+        border: 2px solid $darkerTextPurple;
+    }
+    table td {
+        padding-top: 35px;
+        position: relative;
+        width: 50%;
+    }
+    table td span {
+        font-size: 0.7rem;
+        display: block;
+    }
+    table tbody tr:nth-last-child(1) {
+        border-bottom: 2px solid $darkerTextPurple;
+    }
+    #nursingHomeTab {
+        font-size: 0.7rem;
+        display: block;
+    }
+
+    table tbody tr td:nth-child(1),
+    table tbody tr td:nth-child(2),
+    table tbody tr td:nth-child(3),
+    table tbody tr td:nth-child(4),
+    table tbody tr td:nth-child(5),
+    table tbody tr td:nth-child(6),
+    table tbody tr td:nth-child(7) {
+        border-bottom: 2px solid $darkerTextPurple;
+    }
+
+    table tbody tr td:nth-child(odd) {
+        border-right: 2px solid $darkerTextPurple;
+    }
+}
+
+// ! -------------- ! //
+// ! RESOURCES PAGE ! //
+// ! -------------- ! //
+
+// * Resources * //
+.resources {
+    margin: 0 auto;
+    margin-top: 4rem;
+    text-align: left;
+    color: $darkerTextPurple;
+    padding: 2rem 0;
+    width: 90%;
+
+    &__title {
+        margin-bottom: 0.7rem;
+        font-size: 2.5rem;
+        font-weight: $black;
+        text-shadow: $textShadowDark;
+    }
+    &__text {
+        margin-left: 0.5rem;
+        font-size: 1.3rem;
+        font-weight: $regular;
+        color: $darkTextPurple;
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .resources {
+        width: 85%;
+
+        &__title {
+            font-size: 2.9rem;
+        }
+
+        &__text {
+            font-size: 1.7rem;
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .resources {
+        width: 80%;
+        text-align: left;
+
+        &__title {
+            font-size: 3.3rem;
+        }
+
+        &__text {
+            font-size: 2rem;
+        }
+    }
+}
+
+// * Information * //
+.container-info {
+    background: $lighterSectionPurple;
+}
+.covidInformation {
+    padding: 1.5rem 0;
+    width: 90%;
+    color: $darkTextPurple;
+    font-weight: $bold;
+    margin: 0 auto;
+    &__title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    &__text {
+        color: $darkTextPurple;
+        margin-left: 0.5rem;
+        font-weight: $regular;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        &_link {
+            display: inline;
+            position: relative;
+            a {
+                color: $normalTextBlue;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .covidInformation {
+        width: 85%;
+        &__title {
+            font-size: 2.2rem;
+        }
+        &__text {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .covidInformation {
+        width: 80%;
+        &__title {
+            font-size: 2.5rem;
+        }
+        &__text {
+            font-size: 1.9rem;
+        }
+    }
+}
+
+// * Videos * //
+.videos {
+    width: 90%;
+    margin: 2rem auto;
+
+    &__noSew {
+        cursor: pointer;
+        position: relative;
+
+        &_text {
+            position: absolute;
+            top: 0%;
+            color: white;
+            font-size: clamp(1.5rem, 3vw, 3.5rem);
+            margin-top: 0.5rem;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    &__separate {
+        margin: 1.5rem;
+    }
+    &__sew {
+        cursor: pointer;
+        position: relative;
+
+        &_text {
+            position: absolute;
+            top: 0%;
+            color: white;
+            font-size: clamp(1.5rem, 3vw, 3.5rem);
+            margin-top: 0.5rem;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+video {
+    display: block;
+    width: 100%;
+    max-height: 100%;
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-resources {
+        .videos {
+            width: 85%;
+            &__noSew {
+                &_text {
+                    margin-top: 1rem;
+                }
+            }
+            &__sew {
+                &_text {
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 1275px) {
+    .main-resources {
+        .videos {
+            width: 80%;
+            &__noSew {
+                &_text {
+                    margin-top: 1rem;
+                    //font-size: 2.5rem;
+                }
+            }
+            &__sew {
+                &_text {
+                    margin-top: 1rem;
+                    // font-size: 2.5rem;
+                }
+            }
+        }
+    }
+}
+
+// * Other Information * //
+.container-mask {
+    background-color: $lighterSectionPurple;
+
+    .otherInformation {
+        padding: 1.5rem 0;
+        width: 90%;
+        color: $darkTextPurple;
+        font-weight: $bold;
+        margin: 0 auto;
+
+        &__title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        &__text {
+            color: $darkTextPurple;
+            margin-left: 0.5rem;
+            font-weight: $regular;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            &_link {
+                display: inline;
+                position: relative;
+                a {
+                    color: $normalTextBlue;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-resources {
+        .otherInformation {
+            width: 85%;
+            &__title {
+                font-size: 2.2rem;
+            }
+            &__text {
+                font-size: 1.6rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-resources {
+        .otherInformation {
+            width: 80%;
+            &__title {
+                font-size: 2.5rem;
+            }
+            &__text {
+                font-size: 1.9rem;
+            }
+        }
+    }
+}
+
+// * Other Mask Groups * //
+.otherGroups {
+    padding: 1.5rem 0;
+    width: 90%;
+    color: $darkTextPurple;
+    font-weight: $bold;
+    margin: 0 auto;
+
+    &__title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    &__text {
+        color: $darkTextPurple;
+        margin-left: 0.5rem;
+        font-weight: $regular;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        &_link {
+            display: inline;
+            position: relative;
+            a {
+                color: $normalTextBlue;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-resources {
+        .otherGroups {
+            width: 85%;
+            &__title {
+                font-size: 2.2rem;
+            }
+            &__text {
+                font-size: 1.6rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-resources {
+        .otherGroups {
+            width: 80%;
+            &__title {
+                font-size: 2.5rem;
+            }
+            &__text {
+                font-size: 1.9rem;
+            }
+        }
+    }
+}
+
+// ! ----------- ! //
+// ! DONATE PAGE ! //
+// ! ----------- ! //
+
+// * Donate * //
+.donate {
+    margin: 0 auto;
+    margin-top: 4rem;
+    text-align: left;
+    color: $darkerTextPurple;
+    padding: 2rem 0;
+    width: 90%;
+
+    &__title {
+        margin-bottom: 0.7rem;
+        font-size: 2.5rem;
+        font-weight: $black;
+        text-shadow: $textShadowDark;
+    }
+    &__text {
+        margin-left: 0.5rem;
+        font-size: 1.3rem;
+        font-weight: $regular;
+        color: $darkTextPurple;
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-donate {
+        .donate {
+            width: 85%;
+
+            &__title {
+                font-size: 2.9rem;
+            }
+
+            &__text {
+                font-size: 1.7rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-donate {
+        .donate {
+            width: 80%;
+            text-align: left;
+
+            &__title {
+                font-size: 3.3rem;
+            }
+
+            &__text {
+                font-size: 2rem;
+            }
+        }
+    }
+}
+
+// * Organizations * //
+.container-organizations {
+    background: $lighterSectionPurple;
+}
+.organizations {
+    padding: 1.5rem 0;
+    width: 90%;
+    color: $darkTextPurple;
+    font-weight: $bold;
+    margin: 0 auto;
+    &__title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    &__text {
+        color: $darkTextPurple;
+        margin-left: 0.5rem;
+        font-weight: $regular;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        &_link {
+            color: $darkTextPurple;
+            display: inline;
+            position: relative;
+            a {
+                color: $normalTextBlue;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .organizations {
+        width: 85%;
+        &__title {
+            font-size: 2.2rem;
+        }
+        &__text {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .organizations {
+        width: 80%;
+        &__title {
+            font-size: 2.5rem;
+        }
+        &__text {
+            font-size: 1.9rem;
+        }
+    }
+}
+
+// * Donating Information * //
+.donateInformation {
+    padding: 1.5rem 0;
+    width: 90%;
+    color: $darkTextPurple;
+    font-weight: $bold;
+    margin: 0 auto;
+    &__title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    &__text {
+        color: $darkTextPurple;
+        margin-left: 0.5rem;
+        font-weight: $regular;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        &_link {
+            color: $darkTextPurple;
+            display: inline;
+            position: relative;
+            a {
+                color: $normalTextBlue;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .donateInformation {
+        width: 85%;
+        &__title {
+            font-size: 2.2rem;
+        }
+        &__text {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .donateInformation {
+        width: 80%;
+        &__title {
+            font-size: 2.5rem;
+        }
+        &__text {
+            font-size: 1.9rem;
+        }
+    }
+}
+
+// ! ------------ ! //
+// ! CONTACT PAGE ! //
+// ! ------------ ! //
+
+// * Contact Title * //
+.contact {
+    margin: 0 auto;
+    margin-top: 4rem;
+    text-align: left;
+    color: $darkerTextPurple;
+    padding: 2rem 0;
+    width: 90%;
+
+    &__title {
+        margin-bottom: 0.7rem;
+        font-size: 2.5rem;
+        font-weight: $black;
+        text-shadow: $textShadowDark;
+    }
+    &__text {
+        margin-left: 0.5rem;
+        font-size: 1.3rem;
+        font-weight: $regular;
+        color: $darkTextPurple;
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-contact {
+        .contact {
+            width: 85%;
+
+            &__title {
+                font-size: 2.9rem;
+            }
+
+            &__text {
+                font-size: 1.7rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-contact {
+        .contact {
+            width: 80%;
+            text-align: left;
+
+            &__title {
+                font-size: 3.3rem;
+            }
+
+            &__text {
+                font-size: 2rem;
+            }
+        }
+    }
+}
+
+// * Contact Form * //
+.contactForm {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.nameAndEmail {
+    display: flex;
+    flex-direction: column;
+}
+
+.enterInfo {
+    position: relative;
+    padding: 15px 0 0;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    font-weight: $bold;
+    &__form {
+        font-family: inherit;
+        width: 100%;
+        border: 0;
+        border-bottom: 3px solid $darkerTextPurple;
+        outline: 0;
+        font-size: 1.5rem;
+        color: $darkTextPurple;
+        padding: 7px 0;
+        background: transparent;
+        transition: border-color 0.2s ease-out;
+        position: relative;
+        padding-bottom: 3px;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:placeholder-shown ~ .enterInfo__label {
+            font-size: 1.5rem;
+            cursor: text;
+            top: 10px;
+        }
+
+        &:required,
+        &:invalid {
+            box-shadow: none;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: rgba($darkerTextPurple, 1);
+        z-index: -1;
+    }
+
+    &__form:focus {
+        ~ .enterInfo__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            color: rgba($darkerTextPurple, 1);
+        }
+        font-weight: $bold;
+        border-width: 3px;
+        border-image: linear-gradient(
+            90deg,
+            rgba(111, 50, 161, 1) 0%,
+            rgba(72, 25, 129, 1) 100%
+        );
+        border-image-slice: 1;
+    }
+}
+
+.enterButtonAndText {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#enterMessage__form {
+    padding-bottom: 2rem;
+}
+
+.enterButton {
+    font-family: inherit;
+    color: white;
+    background-color: $darkTextPurple;
+    border-radius: 3rem;
+    text-align: center;
+    padding: 0.2rem 0rem;
+    outline: none;
+    text-decoration: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background-color 200ms ease-out, color 200ms ease-out;
+    display: inline-block;
+    min-width: 6rem;
+    width: 15%;
+    margin: 1rem 0;
+}
+
+.enterButton:hover,
+.enterButton:focus {
+    background-color: $darkerTextPurple;
+    color: white;
+    transition: background-color 300ms ease-in, color 300ms ease-in;
+}
+
+.emailText {
+    color: $darkTextPurple;
+    font-size: 1rem;
+    a {
+        color: $normalTextBlue;
+    }
+
+    a::before {
+        text-decoration: underline;
+        position: absolute;
+        content: attr(data-content);
+        clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%);
+        transition: clip-path 275ms ease;
+    }
+    a:hover::before {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-contact {
+        .emailText {
+            font-size: 1.2rem;
+        }
+        .contactForm {
+            width: 85%;
+        }
+        .enterInfo {
+            &__form {
+                font-size: 2rem;
+
+                &::placeholder {
+                    color: transparent;
+                }
+
+                &:placeholder-shown ~ .enterInfo__label {
+                    font-size: 2rem;
+                }
+            }
+
+            &__label {
+                font-size: 1.1rem;
+            }
+
+            &__form:focus {
+                ~ .enterInfo__label {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+
+        .enterButton {
+            font-size: 1.7rem;
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .nameAndEmail {
+        flex-direction: row;
+        margin-bottom: 1rem;
+    }
+
+    .enterEmail {
+        margin-left: 4rem;
+    }
+
+    .main-contact {
+        .emailText {
+            font-size: 1.4rem;
+        }
+        .contactForm {
+            width: 80%;
+        }
+        .enterInfo {
+            &__form {
+                font-size: 2.4rem;
+
+                &::placeholder {
+                    color: transparent;
+                }
+
+                &:placeholder-shown ~ .enterInfo__label {
+                    font-size: 2.4rem;
+                }
+            }
+
+            &__label {
+                font-size: 1.1rem;
+            }
+
+            &__form:focus {
+                ~ .enterInfo__label {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+
+        .enterButton {
+            font-size: 1.9rem;
+        }
+    }
+
+    #enterMessage__form {
+        padding-bottom: 4rem;
+    }
+}
