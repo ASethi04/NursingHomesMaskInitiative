@@ -90,45 +90,19 @@ const hoverNavEffects = () => {
     }
 };
 
-/**
- * Creates Sweet Alert and animates it
- */
-const otherInfoAlert = () => {
-    const links = document.getElementsByClassName("moreInformation");
-    for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener("click", evt => {
-            var event = evt.target || evt.srcElement;
-
-            Swal.fire({
-                title: "Other Information",
-                html: event.getAttribute("data-text"),
-                showClass: {
-                    popup: "animate__animated animate__fadeIn animate__faster "
-                },
-                hideClass: {
-                    popup: "animate__animated animate__fadeOut animate__faster"
-                },
-                confirmButtonColor: "#4b2073"
-            });
-        });
-    }
-};
-
 const init = () => {
     stickyNav();
     navSlide();
     hoverNavEffects();
-    otherInfoAlert();
 };
 
 const replaceContent = () => {
     hoverNavEffects();
     navSlide();
-    otherInfoAlert();
 };
 
 init();
 
-swup.on("contentReplaced", init);
-
-swup.on("willReplaceContent", replaceContent);
+swup.on("contentReplaced", function() {
+    init();
+});
