@@ -50,7 +50,8 @@
                     },
                     hideClass: {
                         popup: "animate__animated animate__fadeOut animate__faster"
-                    }
+                    },
+                    confirmButtonColor: "#ff6961"
                 });
             </script>
             @endif
@@ -66,7 +67,8 @@
                     },
                     hideClass: {
                         popup: "animate__animated animate__fadeOut animate__faster"
-                    }
+                    },
+                    confirmButtonColor: "#77dd77"
                 });
             </script>
             @endif

@@ -8,23 +8,6 @@ const isNumber = evt => {
 };
 
 /**
- * Creates Sweet Alert and animates it
- */
-const otherInfoAlert = evt => {
-    Swal.fire({
-        title: "Other Information",
-        html: evt.getAttribute("data-text"),
-        showClass: {
-            popup: "animate__animated animate__fadeIn animate__faster "
-        },
-        hideClass: {
-            popup: "animate__animated animate__fadeOut animate__faster"
-        },
-        confirmButtonColor: "#4b2073"
-    });
-};
-
-/**
  * Takes input and filters the graph based on input
  */
 const filterLocations = () => {
@@ -92,7 +75,8 @@ function showPosition() {
                             hideClass: {
                                 popup:
                                     "animate__animated animate__fadeOut animate__faster"
-                            }
+                            },
+                            confirmButtonColor: "#4b2073"
                         });
                         return;
                     }
@@ -117,7 +101,8 @@ function showPosition() {
                         hideClass: {
                             popup:
                                 "animate__animated animate__fadeOut animate__faster"
-                        }
+                        },
+                        confirmButtonColor: "#4b2073"
                     });
                 });
         });
@@ -131,7 +116,32 @@ function showPosition() {
             },
             hideClass: {
                 popup: "animate__animated animate__fadeOut animate__faster"
-            }
+            },
+            confirmButtonColor: "#4b2073"
         });
     }
 }
+
+/**
+ * Changes the underline in the navbar when you click a
+ * page link that is outside of the navbar
+ * @param {*} page Page name
+ */
+const changeNavBar = evt => {
+    var links = document.querySelectorAll(".nav__links li a");
+    var target = "/" + evt;
+    for (var i = 0; i < links.length; i++) {
+        if (
+            !links[i].classList.contains("current") &&
+            links[i].classList.contains("active")
+        ) {
+            links[i].classList.remove("active");
+            links[i].classList.add("not-active");
+        }
+
+        if (links[i].getAttribute("href") === target) {
+            links[i].classList.remove("not-active", "current");
+            links[i].classList.add("active", "current");
+        }
+    }
+};

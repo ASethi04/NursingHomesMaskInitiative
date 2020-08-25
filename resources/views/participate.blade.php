@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 
+<?php
+    include_once $_SERVER['DOCUMENT_ROOT']. '../php/config.php';
+    $db = mysqli_connect($myhost, $myuser, $mypw, $mydbname)
+    or die("Error connecting to $myhost");
+    unset ($myhost, $myuser, $mypw, $mydbname);
+?>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -70,23 +77,34 @@
                         <th>Donate Masks</th>
                     </tr>
                 </thead>
-                <tbody>                
-                @foreach($homes as $row)
-                <tr>
-                    @foreach($row as $value)
-                        @if($value == json_decode(json_encode($row), true)['Other Information'])
-                            <td><span>Other Information</span> <a class='alert' data-text={{$value}} data-content='More Information' onclick='otherInfoAlert(this)'>More Information</a></td>
-                        @elseif($value == json_decode(json_encode($row), true)['Name'])
-                            <td><span id='nursingHomeTab'>Nursing Home</span>{{$value}}</td>
-                        @else
-                            <td><span></span>{{$value}}</td>
-                        @endif
-                    @endforeach
-                    <form method="GET" action="/participate/{{json_decode(json_encode($row), true)['Name']}}">
-                    <td><span>Donate Masks</span> <button class='donate-button' data-content='Donate' href='#'>Donate</button></td>
-                    </form>
-                </tr>
-                @endforeach
+                <tbody>
+                    <?php
+                $result = mysqli_query($db, "SELECT Name, Needs, Address, `Zip Code`, `Mask Type`, `Mask Fabric`, `Mailing Address`, `Other Information`, `Donate` from final");
+                
+                while ($row = $result->fetch_assoc())
+                {
+                echo "<tr>";
+                    $counter = 0;
+                    $colNames = ["Nursing Home", "Needs", "Address", "Zip Code", "Mask Type", "Mask Fabric", "Mailing Address", "Other Information", "Donate Masks"];
+                    foreach($row as $value) {
+                        if ($colNames[$counter] == "Other Information") {
+                            echo "<td><span>$colNames[$counter]</span> <a class='alert moreInformation' data-text='$value' data-content='More Information' >More Information</a></td>";
+                        } 
+                        else if ($colNames[$counter] == "Donate Masks") {
+                            echo "<td><span>$colNames[$counter]</span> <button class='donate-button' data-content='Donate' href='#'>Donate</button></td>";
+                        } 
+                        else if ($colNames[$counter] == "Nursing Home") {
+                            echo "<td><span id='nursingHomeTab'>$colNames[$counter]</span> $value</td>";
+                        }
+                        else {
+                            echo "<td><span>$colNames[$counter]</span> $value</td>";
+                        }
+                        ++$counter;
+                    }
+                echo "</tr>";
+
+                }
+                ?>
                 </tbody>
             </table>
         </div>
