@@ -1,5 +1,5 @@
 const swup = new Swup({
-    plugins: [new SwupSlideTheme()]
+    plugins: [new SwupSlideTheme()],
 });
 
 /**
@@ -20,14 +20,14 @@ const navSlide = () => {
             if (link.style.animation) {
                 link.style.animation = "";
             } else {
-                link.style.animation = `navLinkFade 400ms ease-out forwards ${index /
-                    10 +
-                    0.3}s`;
+                link.style.animation = `navLinkFade 400ms ease-out forwards ${
+                    index / 10 + 0.3
+                }s`;
             }
         });
 
         for (var i = 0; i < navLinks.length; i++) {
-            navLinks[i].addEventListener("click", evt => {
+            navLinks[i].addEventListener("click", (evt) => {
                 if (nav.classList.contains("nav--active")) {
                     nav.classList.toggle("nav--active");
                 }
@@ -45,7 +45,7 @@ const navSlide = () => {
  * Checks if user scrolled and if so, changes the nav to w/o padding and sticky
  */
 const stickyNav = () => {
-    window.addEventListener("scroll", function() {
+    window.addEventListener("scroll", function () {
         if (window.scrollY == 0) {
             var nav = document.getElementsByClassName("nav");
             for (var i = 0; i < nav.length; i++) {
@@ -72,15 +72,18 @@ const hoverNavEffects = () => {
     }
 
     for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener("click", evt => {
-            var target = evt.target || evt.srcElement;
-            target.classList.remove("not-active", "current");
-            target.classList.add("active", "current");
-
+        links[i].addEventListener("click", (evt) => {
+                var target = evt.target || evt.srcElement;
+                if(target.id !== "loginButton" && target.id !== "registerButton") {
+                    target.classList.remove("not-active", "current");
+                    target.classList.add("active", "current");
+                } 
             for (var j = 0; j < links.length; j++) {
                 if (
                     !links[j].classList.contains("current") &&
-                    links[j].classList.contains("active")
+                    links[j].classList.contains("active") && 
+                    links[j].id !== "loginButton" &&
+                     links[j].id !== "registerButton"
                 ) {
                     links[j].classList.remove("active");
                     links[j].classList.add("not-active");
@@ -90,19 +93,45 @@ const hoverNavEffects = () => {
     }
 };
 
+/**
+ * Creates Sweet Alert and animates it
+ */
+const otherInfoAlert = () => {
+    const links = document.getElementsByClassName("moreInformation");
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener("click", (evt) => {
+            var event = evt.target || evt.srcElement;
+
+            Swal.fire({
+                title: "Other Information",
+                html: event.getAttribute("data-text"),
+                showClass: {
+                    popup: "animate__animated animate__fadeIn animate__faster ",
+                },
+                hideClass: {
+                    popup: "animate__animated animate__fadeOut animate__faster",
+                },
+                confirmButtonColor: "#4b2073",
+            });
+        });
+    }
+};
+
 const init = () => {
     stickyNav();
     navSlide();
     hoverNavEffects();
+    otherInfoAlert();
 };
 
 const replaceContent = () => {
     hoverNavEffects();
     navSlide();
+    otherInfoAlert();
 };
 
 init();
 
-swup.on("contentReplaced", function() {
-    init();
-});
+swup.on("contentReplaced", init);
+
+swup.on("willReplaceContent", replaceContent);

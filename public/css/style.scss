@@ -31,7 +31,27 @@
 7. Contact Page
     7.1 Contact Title
     7.2 Contact Form
-
+8. Dashboard Page
+    8.1 Dashboard Title
+    8.2 Current Goals
+    8.3 Current Orders
+    8.4 Past Orders
+9. Donate Masks Page
+    9.1 Donate Masks Title
+    9.2 Donate Masks Form
+    9.3 Donate Masks Custom Select Menu
+    9.4 Custom Checkbox
+    9.5 Custom Radio Buttons
+    9.6 Submit Button
+10. Login Page
+    10.1 Login Title
+    10.2 Login Form
+    10.5 Remember Me Checkbox
+    10.4 Login Button 
+11. Register Page
+    11.1 Register Button
+12. Reset Password Page
+    12.1 Reset Button
 */
 
 // * Variables * //
@@ -44,6 +64,12 @@ $normalTextBlue: #2e3174;
 $mainSectionPurple: #fde3ff;
 $lighterSectionPurple: #fff6ff;
 $navBarPurple: #fde3ff;
+$greenButtonBackground: #7bfb88;
+$greenButtonText: #255225;
+$redButtonBackground: #fb7b7b;
+$redButtonText: #731c1c;
+$radioBorder: #6c33a0;
+$radioActive: #411c63;
 
 // Font Weights
 $thin: 100;
@@ -51,6 +77,9 @@ $light: 300;
 $regular: 400;
 $bold: 700;
 $black: 900;
+
+// Sizes
+$radioSize: 1.2rem;
 
 //Other
 $textShadowDark: 0px -7px 0px rgba(251, 210, 255, 0.8);
@@ -117,7 +146,7 @@ body {
     &__links {
         display: flex;
         justify-content: space-around;
-        width: 60%;
+        width: 70%;
 
         li {
             list-style: none;
@@ -126,7 +155,6 @@ body {
                 position: relative;
                 padding-bottom: 0.25rem;
                 letter-spacing: 1px;
-                font-weight: $regular;
                 color: $normalTextPurple;
                 text-decoration: none;
                 font-size: 1.3rem;
@@ -157,6 +185,29 @@ body {
                 -webkit-transform: translateY(0px);
                 -moz-transform: translateY(0px);
                 transform: translateY(0px);
+            }
+
+            #loginButton,
+            #registerButton {
+                padding: 0.2rem 0.6rem;
+                color: $normalTextPurple;
+                border: none;
+                background: none;
+                text-align: center;
+                outline: none;
+                text-decoration: none;
+                border-radius: 3rem;
+                border: 0.15rem solid $normalTextPurple;
+                transition: background-color 200ms ease-in, color 200ms ease-in;
+            }
+
+            #loginButton:hover,
+            #registerButton:hover,
+            #loginButton:focus,
+            #registerButton:focus {
+                color: white;
+                background-color: $normalTextPurple;
+                transition: background-color 300ms ease-in, color 300ms ease-in;
             }
 
             .active::after {
@@ -195,7 +246,7 @@ body {
 
 @media screen and (max-width: 1024px) {
     .nav__links {
-        width: 70%;
+        width: 80%;
         li {
             a {
                 font-size: 1.3rem;
@@ -204,7 +255,7 @@ body {
     }
 }
 
-@media screen and (max-width: 786px) {
+@media screen and (max-width: 900px) {
     body {
         overflow-x: hidden;
     }
@@ -636,7 +687,7 @@ body {
         font-size: 2rem;
     }
     &__svg {
-        display: none; //! Change to flex when able to
+        display: flex; //! Change to flex when able to
         justify-content: center;
         &_instagram {
             filter: $svgFilter;
@@ -992,7 +1043,7 @@ body {
         font-size: 2rem;
     }
     &__svg {
-        display: none; //! Change to flex when able to
+        display: flex; //! Change to flex when able to
         justify-content: center;
         &_instagram {
             filter: $svgFilter;
@@ -1375,16 +1426,10 @@ table td span {
     display: inline-block;
 }
 
-a::before {
-    text-decoration: underline;
-    position: absolute;
-    content: attr(data-content);
-    clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%);
-    transition: clip-path 275ms ease;
+a {
+    color: $normalTextBlue;
 }
-a:hover::before {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
+
 
 .donate-button {
     display: inline-block;
@@ -1463,8 +1508,13 @@ a:hover::before {
     table tbody tr td:nth-child(3),
     table tbody tr td:nth-child(4),
     table tbody tr td:nth-child(5),
-    table tbody tr td:nth-child(6) {
+    table tbody tr td:nth-child(6),
+    table tbody tr td:nth-child(7) {
         border-bottom: 2px solid $darkerTextPurple;
+    }
+
+    #donate-button {
+        border-right: 2px solid $darkerTextPurple;
     }
 
     table tbody tr td:nth-child(odd) {
@@ -1527,6 +1577,10 @@ a:hover::before {
     table tbody tr td:nth-child(6),
     table tbody tr td:nth-child(7) {
         border-bottom: 2px solid $darkerTextPurple;
+    }
+
+    #donate-button {
+        border-right: 2px solid $darkerTextPurple;
     }
 
     table tbody tr td:nth-child(odd) {
@@ -2294,5 +2348,1431 @@ video {
 
     #enterMessage__form {
         padding-bottom: 4rem;
+    }
+}
+
+// ! -------------- ! //
+// ! DASHBOARD PAGE ! //
+// ! -------------- ! //
+// * Dashboard Title * //
+.dashboard {
+    margin: 0 auto;
+    margin-top: 6rem;
+    width: 90%;
+
+    &__title {
+        color: $darkerTextPurple;
+        font-size: 2.3rem;
+        margin-bottom: 0.4rem;
+        font-weight: $black;
+    }
+
+    &__text {
+        color: $darkTextPurple;
+        font-size: 1.3rem;
+        margin-left: 0.5rem;
+    }
+}
+
+.dashboardCards {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    align-self: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+}
+
+// * Current Goals * //
+.currentGoal {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.7rem 1rem 1.2rem 1rem;
+    background-color: $lighterSectionPurple;
+    border-radius: 1rem;
+    margin-top: 1rem;
+
+    &__title {
+        font-size: 1.8rem;
+        color: $darkerTextPurple;
+        font-weight: $bold;
+    }
+
+    &__barContainer {
+        color: $darkTextPurple;
+
+        .text-container {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            padding: 0 0.5rem;
+        }
+
+        &_bar {
+            margin-top: 0.2rem;
+            width: 100%;
+            background: none;
+            padding: 1.1rem 0;
+            border-radius: 5rem;
+            border: 0.2rem solid $darkTextPurple;
+            position: relative;
+            &-width {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: calc(50% + 0.2rem);
+                background-color: $darkTextPurple;
+                padding: 1.1rem 0.1rem;
+                margin: 0 -0.1rem;
+                border-top-left-radius: 5rem;
+                border-bottom-left-radius: 5rem;
+            }
+        }
+    }
+
+    &__button {
+        color: $darkTextPurple;
+        display: inline-block;
+        width: 100%;
+        margin-top: 1rem;
+        text-decoration: none;
+        text-align: center;
+        font-size: 1.4rem;
+        padding: 0.3rem 0.5rem;
+        border: 0.2rem solid $darkTextPurple;
+        background: none;
+        transition: background 200ms ease-in, color 200ms ease-in;
+        border-radius: 5rem;
+    }
+
+    &__button:hover,
+    &__button:focus {
+        color: $lighterSectionPurple;
+        background-color: $darkTextPurple;
+        transition: background 300ms ease-in, color 300ms ease-in;
+    }
+}
+
+// * Current Orders * //
+.currentOrders {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.7rem 1rem 1.2rem 1rem;
+    background-color: $lighterSectionPurple;
+    border-radius: 1rem;
+    margin-top: 1rem;
+
+    &__title {
+        font-size: 1.8rem;
+        color: $darkerTextPurple;
+        font-weight: $bold;
+    }
+
+    &__nursingHome {
+        margin-top: 0.3rem;
+        margin-left: 0.1rem;
+        font-size: 1.1rem;
+        color: $darkTextPurple;
+        font-weight: $bold;
+    }
+
+    &__nursingHome:not(#firstNursingHome) {
+        margin-top: 1rem;
+    }
+
+    &__masks {
+        margin: 0.2rem 0 0.2rem 0.1rem;
+        color: $normalTextPurple;
+    }
+
+    &__buttons {
+        margin-top: 0.7rem;
+        display: flex;
+        font-weight: $bold;
+        &_fulfilled {
+            text-decoration: none;
+            background-color: $greenButtonBackground;
+            color: $greenButtonText;
+            text-align: center;
+            width: 50%;
+            padding: 0.2em 0;
+            border-radius: 5rem;
+            margin-right: 0.5rem;
+            transition: background-color 200ms ease-in;
+        }
+
+        &_fulfilled:hover,
+        &_fulfilled:focus {
+            background-color: #46f958;
+            transition: background-color 300ms ease-out;
+        }
+
+        &_cancel {
+            text-decoration: none;
+            margin-left: 0.5rem;
+            background-color: $redButtonBackground;
+            color: $redButtonText;
+            text-align: center;
+            width: 50%;
+            padding: 0.2em 0;
+            border-radius: 5rem;
+            transition: background-color 200ms ease-in;
+        }
+
+        &_cancel:hover,
+        &_cancel:focus {
+            background-color: #fa6060;
+            transition: background-color 300ms ease-out;
+        }
+    }
+}
+
+// * Past Orders * //
+.pastOrders {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.7rem 1rem 1.2rem 1rem;
+    background-color: $lighterSectionPurple;
+    border-radius: 1rem;
+    margin-top: 1rem;
+
+    &__title {
+        font-size: 1.8rem;
+        color: $darkerTextPurple;
+        font-weight: $bold;
+    }
+
+    &__nursingHome {
+        margin-top: 0.3rem;
+        margin-left: 0.1rem;
+        font-size: 1.1rem;
+        color: $darkTextPurple;
+        font-weight: $bold;
+    }
+
+    &__nursingHome:not(#firstNursingHome) {
+        margin-top: 1rem;
+    }
+
+    &__masks {
+        margin: 0.2rem 0 0.2rem 0.1rem;
+        color: $normalTextPurple;
+    }
+
+    &__buttonFulfilled {
+        margin-top: 0.7rem;
+        display: inherit;
+        text-decoration: none;
+        background-color: $greenButtonBackground;
+        color: $greenButtonText;
+        text-align: center;
+        width: 100%;
+        padding: 0.2em 0;
+        border-radius: 5rem;
+        font-weight: $bold;
+        transition: background-color 200ms ease-in;
+    }
+
+    &__buttonFulfilled:hover,
+    &__buttonFulfilled:focus {
+        cursor: default;
+        background-color: #46f958;
+        transition: background-color 300ms ease-out;
+    }
+
+    &__buttonCancelled {
+        margin-top: 0.7rem;
+        display: inherit;
+        text-decoration: none;
+        background-color: $redButtonBackground;
+        color: $redButtonText;
+        text-align: center;
+        width: 100%;
+        padding: 0.2em 0;
+        border-radius: 5rem;
+        font-weight: $bold;
+        transition: background-color 200ms ease-in;
+    }
+
+    &__buttonCancelled:hover,
+    &__buttonCancelled:focus {
+        cursor: default;
+        background-color: #fa6060;
+        transition: background-color 300ms ease-out;
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-dashboard {
+        .dashboard {
+            width: 85%;
+
+            &__title {
+                font-size: 2.7rem;
+            }
+
+            &__text {
+                font-size: 1.7rem;
+            }
+        }
+
+        .dashboardCards {
+            width: 85%;
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-dashboard {
+        .dashboard {
+            width: 80%;
+
+            &__title {
+                font-size: 3.1rem;
+            }
+
+            &__text {
+                font-size: 2.1rem;
+            }
+        }
+
+        .dashboardCards {
+            width: 80%;
+        }
+    }
+}
+
+// ! ----------------- ! //
+// ! DONATE MASKS PAGE ! //
+// ! ----------------- ! //
+// * Donate Masks Title * //
+.donateMasks {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 6rem;
+
+    &__title {
+        font-size: 2.5rem;
+        color: $darkerTextPurple;
+        font-weight: $black;
+        text-shadow: $textShadowDark;
+    }
+
+    &__text {
+        font-size: 1.3rem;
+        color: $darkTextPurple;
+        margin-left: 0.5rem;
+    }
+}
+
+// * Donate Masks Form * //
+.donateMasksContainer {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+}
+
+.donateMasksFlexContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.donateMasksFormContainer {
+    position: relative;
+    padding: 15px 0 0;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    font-weight: $bold;
+    &__form {
+        font-family: inherit;
+        width: 100%;
+        border: 0;
+        border-bottom: 3px solid $darkerTextPurple;
+        outline: 0;
+        font-size: 1.5rem;
+        color: $darkTextPurple;
+        padding: 7px 0;
+        background: transparent;
+        transition: border-color 0.2s ease-out;
+        position: relative;
+        padding-bottom: 3px;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:placeholder-shown ~ .donateMasksFormContainer__label {
+            font-size: 1.5rem;
+            cursor: text;
+            top: 10px;
+        }
+
+        &:required,
+        &:invalid {
+            box-shadow: none;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: rgba($darkerTextPurple, 1);
+        z-index: -1;
+    }
+
+    &__form:focus {
+        ~ .donateMasksFormContainer__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            color: rgba($darkerTextPurple, 1);
+        }
+        font-weight: $bold;
+        border-width: 3px;
+        border-image: linear-gradient(
+            90deg,
+            rgba(111, 50, 161, 1) 0%,
+            rgba(72, 25, 129, 1) 100%
+        );
+        border-image-slice: 1;
+    }
+}
+
+#numberOfMasks {
+    margin-top: 0.8rem;
+}
+
+// * Donate Masks Custom Select Menu * //
+.customSelect {
+    font-family: inherit;
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    z-index: 10;
+    border-bottom: 3px solid $darkerTextPurple;
+
+    select {
+        max-width: 88%;
+        cursor: pointer;
+        font-family: inherit;
+        border: none;
+        outline: none;
+        background: $mainSectionPurple;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0;
+        margin: 0;
+        display: block;
+        width: 100%;
+        padding: 7px 0 12px 0;
+        color: $darkTextPurple;
+        font-size: 1.5rem;
+        font-weight: $bold;
+        margin-left: -0.25rem;
+    }
+    &:after {
+        display: flex;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 1.5rem;
+        height: 100%;
+        content: url("../svg/dropdownMenuArrow.svg");
+        color: $darkTextPurple;
+        z-index: 1;
+        margin-right: 1rem;
+    }
+
+    option {
+        width: 90%;
+        cursor: pointer;
+        font-weight: $regular;
+    }
+}
+
+// * Custom Radio Buttons * //
+#mailInMasks {
+    margin: 0.5em 0 0 0;
+}
+#dropOffMasks {
+    margin: 1.5rem 0 0.5rem 0;
+}
+.donateMasksRadio {
+    display: block;
+    cursor: pointer;
+    input {
+        display: none;
+        & + span {
+            line-height: $radioSize - 0.2;
+            height: $radioSize;
+            padding-left: $radioSize;
+            display: block;
+            position: relative;
+            color: $darkTextPurple;
+            font-size: 1.5rem;
+            font-weight: $bold;
+            &:not(:empty) {
+                padding-left: $radioSize + 1;
+            }
+            &:before,
+            &:after {
+                content: "";
+                width: $radioSize;
+                height: $radioSize;
+                display: block;
+                border-radius: 50%;
+                left: 0;
+                top: 0;
+                position: absolute;
+            }
+            &:before {
+                background: $radioBorder;
+                transition: background 0.2s ease,
+                    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2);
+            }
+            &:after {
+                background: #fff;
+                transform: scale(0.78);
+                transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4);
+            }
+        }
+        &:checked + span {
+            &:before {
+                transform: scale(1.04);
+                background: $radioActive;
+            }
+            &:after {
+                transform: scale(0.4);
+                transition: transform 0.3s ease;
+            }
+        }
+    }
+    &:hover {
+        input {
+            & + span {
+                &:before {
+                    transform: scale(0.92);
+                }
+                &:after {
+                    transform: scale(0.74);
+                }
+            }
+            &:checked + span {
+                &:after {
+                    transform: scale(0.4);
+                }
+            }
+        }
+    }
+}
+
+// * Custom Checkbox * //
+.checkboxContainer {
+    position: relative;
+}
+.checkbox {
+    position: relative;
+    opacity: 0;
+
+    &:checked + label svg path {
+        stroke-dashoffset: 0;
+    }
+
+    &:focus + label {
+        transform: scale(1.1);
+    }
+}
+
+.checkboxLabel {
+    --d: 1.3rem;
+}
+
+.checkbox + label {
+    position: relative;
+    background-color: white;
+    display: block;
+    border: 3px solid $darkTextPurple;
+    width: var(--d);
+    height: var(--d);
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: all 200ms ease;
+
+    svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0.9rem;
+        pointer-events: none;
+        path {
+            fill: none;
+            stroke: $darkTextPurple;
+            stroke-width: 0.4rem;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 101;
+            transition: all 250ms cubic-bezier(1, 0, 0.37, 0.91);
+        }
+    }
+}
+
+.checkboxText {
+    position: absolute;
+    top: 34%;
+    left: 2.2rem;
+    font-size: 1.5rem;
+    font-weight: $bold;
+    color: $darkTextPurple;
+}
+
+// * Submit Button * //
+.submitButton {
+    font-family: inherit;
+    color: white;
+    background-color: $darkTextPurple;
+    border-radius: 3rem;
+    text-align: center;
+    padding: 0.2rem 0rem;
+    outline: none;
+    text-decoration: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background-color 200ms ease-out, color 200ms ease-out;
+    display: inline-block;
+    min-width: 6rem;
+    width: 15%;
+    margin: 3rem 0 1rem;
+}
+
+.submitButton:hover,
+.submitButton:focus {
+    background-color: $darkerTextPurple;
+    color: white;
+    transition: background-color 300ms ease-in, color 300ms ease-in;
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-join {
+        .donateMasks {
+            width: 85%;
+
+            &__title {
+                font-size: 2.9rem;
+            }
+
+            &__text {
+                font-size: 1.7rem;
+            }
+        }
+
+        .donateMasksContainer {
+            width: 85%;
+        }
+
+        .donateMasksFormContainer {
+            &__form {
+                font-size: 2rem;
+
+                &:placeholder-shown ~ .donateMasksFormContainer__label {
+                    font-size: 2rem;
+                }
+            }
+
+            &__label {
+                font-size: 1rem;
+            }
+
+            &__form:focus {
+                ~ .donateMasksFormContainer__label {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .customSelect {
+            select {
+                max-width: 93%;
+                font-size: 2rem;
+            }
+            &:after {
+                width: 2rem;
+                margin-right: 1rem;
+            }
+        }
+
+        #mailInMasks {
+            margin: 0.5em 0 0 0;
+        }
+        #dropOffMasks {
+            margin: 1.5rem 0 0.5rem 0;
+        }
+        .donateMasksRadio {
+            input {
+                & + span {
+                    line-height: 1.2rem - 0.2;
+                    height: 1.2rem;
+                    padding-left: 2.2rem;
+                    font-size: 1.7rem;
+                    &:not(:empty) {
+                        padding-left: 1.2rem + 1rem;
+                    }
+                    &:before,
+                    &:after {
+                        width: 1.2rem;
+                        height: 1.2rem;
+                    }
+                }
+                &:checked + span {
+                    &:before {
+                        transform: scale(1.04);
+                    }
+                    &:after {
+                        transform: scale(0.4);
+                    }
+                }
+            }
+            &:hover {
+                input {
+                    & + span {
+                        &:before {
+                            transform: scale(0.92);
+                        }
+                        &:after {
+                            transform: scale(0.74);
+                        }
+                    }
+                    &:checked + span {
+                        &:after {
+                            transform: scale(0.4);
+                        }
+                    }
+                }
+            }
+        }
+
+        .checkboxLabel {
+            --d: 1.3rem;
+        }
+
+        .checkbox + label {
+            width: var(--d);
+            height: var(--d);
+
+            svg {
+                width: 0.9rem;
+                path {
+                    stroke-width: 0.4rem;
+                }
+            }
+        }
+
+        .checkboxText {
+            position: absolute;
+            top: 27%;
+            left: 2.2rem;
+            font-size: 1.7rem;
+        }
+
+        .submitButton {
+            font-size: 1.7rem;
+        }
+    }
+}
+@media screen and (min-width: 1275px) {
+    .main-join {
+        .donateMasks {
+            width: 80%;
+
+            &__title {
+                font-size: 3.3rem;
+            }
+
+            &__text {
+                font-size: 2rem;
+            }
+        }
+
+        .donateMasksContainer {
+            width: 80%;
+        }
+
+        .donateMasksFormContainer {
+            &__form {
+                font-size: 2.4rem;
+
+                &:placeholder-shown ~ .donateMasksFormContainer__label {
+                    font-size: 2.4rem;
+                }
+            }
+
+            &__label {
+                font-size: 1rem;
+            }
+
+            &__form:focus {
+                ~ .donateMasksFormContainer__label {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .donateMasksFlexContainer {
+            flex-direction: row;
+        }
+
+        .donateMasksMarginContainer {
+            margin-left: 4rem;
+        }
+
+        #otherMatsLabel,
+        #otherMatsInput {
+            margin-top: 0.8rem;
+        }
+
+        .customSelect {
+            margin-left: 4rem;
+            margin-bottom: 1rem;
+            select {
+                padding: 14px 0 9px 0;
+                max-width: 90%;
+                font-size: 2.4rem;
+            }
+            &:after {
+                width: 2rem;
+                margin-right: 1rem;
+            }
+        }
+
+        #mailInMasks {
+            margin: 2em 0 1.5rem 0;
+        }
+        #dropOffMasks {
+            margin: 2rem 0 0rem 0;
+        }
+        .donateMasksRadio {
+            input {
+                & + span {
+                    line-height: 1.4rem - 0.2;
+                    height: 1.4rem;
+                    padding-left: 2.2rem;
+                    font-size: 2.1rem;
+                    &:not(:empty) {
+                        padding-left: 2.2rem;
+                    }
+                    &:before,
+                    &:after {
+                        width: 1.4rem;
+                        height: 1.4rem;
+                    }
+                }
+                &:checked + span {
+                    &:before {
+                        transform: scale(1.04);
+                    }
+                    &:after {
+                        transform: scale(0.4);
+                    }
+                }
+            }
+            &:hover {
+                input {
+                    & + span {
+                        &:before {
+                            transform: scale(0.92);
+                        }
+                        &:after {
+                            transform: scale(0.74);
+                        }
+                    }
+                    &:checked + span {
+                        &:after {
+                            transform: scale(0.4);
+                        }
+                    }
+                }
+            }
+        }
+
+        #mailInMasks {
+            margin-right: 3rem;
+        }
+
+        .donateMasksButtonFlexContainer {
+            display: flex;
+        }
+
+        .checkboxLabel {
+            --d: 1.3rem;
+        }
+
+        .checkbox + label {
+            width: var(--d);
+            height: var(--d);
+
+            svg {
+                width: 0.9rem;
+                path {
+                    stroke-width: 0.4rem;
+                }
+            }
+        }
+
+        .checkboxText {
+            position: absolute;
+            top: 17%;
+            left: 2.2rem;
+            font-size: 2.1rem;
+        }
+
+        .submitButton {
+            font-size: 1.9rem;
+        }
+    }
+}
+// ! ---------- ! //
+// ! LOGIN PAGE ! //
+// ! ---------- ! //
+// * Login Title * //
+.login {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 6rem;
+
+    &__title {
+        font-size: 2.5rem;
+        color: $darkerTextPurple;
+        font-weight: $black;
+        text-shadow: $textShadowDark;
+    }
+
+    &__text {
+        font-size: 1.3rem;
+        color: $darkTextPurple;
+        margin-left: 0.5rem;
+    }
+}
+
+// * Login Form * //
+.loginForm {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.loginEmail {
+    position: relative;
+    padding: 15px 0 0;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    font-weight: $bold;
+    &__form {
+        font-family: inherit;
+        width: 100%;
+        border: 0;
+        border-bottom: 3px solid $darkerTextPurple;
+        outline: 0;
+        font-size: 1.5rem;
+        color: $darkTextPurple;
+        padding: 7px 0;
+        background: transparent;
+        transition: border-color 0.2s ease-out;
+        position: relative;
+        padding-bottom: 3px;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:placeholder-shown ~ .loginEmail__label {
+            font-size: 1.5rem;
+            cursor: text;
+            top: 10px;
+        }
+
+        &:required,
+        &:invalid {
+            box-shadow: none;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: rgba($darkerTextPurple, 1);
+        z-index: -1;
+    }
+
+    &__form:focus {
+        ~ .loginEmail__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            color: rgba($darkerTextPurple, 1);
+        }
+        font-weight: $bold;
+        border-width: 3px;
+        border-image: linear-gradient(
+            90deg,
+            rgba(111, 50, 161, 1) 0%,
+            rgba(72, 25, 129, 1) 100%
+        );
+        border-image-slice: 1;
+    }
+}
+
+.loginPassword {
+    position: relative;
+    padding: 15px 0 0;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    font-weight: $bold;
+    &__form {
+        font-family: inherit;
+        width: 100%;
+        border: 0;
+        border-bottom: 3px solid $darkerTextPurple;
+        outline: 0;
+        font-size: 1.5rem;
+        color: $darkTextPurple;
+        padding: 7px 0;
+        background: transparent;
+        transition: border-color 0.2s ease-out;
+        position: relative;
+        padding-bottom: 3px;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:placeholder-shown ~ .loginPassword__label {
+            font-size: 1.5rem;
+            cursor: text;
+            top: 10px;
+        }
+
+        &:required,
+        &:invalid {
+            box-shadow: none;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: rgba($darkerTextPurple, 1);
+        z-index: -1;
+    }
+
+    &__form:focus {
+        ~ .loginPassword__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            color: rgba($darkerTextPurple, 1);
+        }
+        font-weight: $bold;
+        border-width: 3px;
+        border-image: linear-gradient(
+            90deg,
+            rgba(111, 50, 161, 1) 0%,
+            rgba(72, 25, 129, 1) 100%
+        );
+        border-image-slice: 1;
+    }
+}
+
+// * Remember Me Checkbox * //
+.rememberMeCheckbox {
+    position: relative;
+
+    &__input {
+        position: relative;
+        opacity: 0;
+
+        &:checked + label svg path {
+            stroke-dashoffset: 0;
+        }
+
+        &:focus + label {
+            transform: scale(1.1);
+        }
+    }
+
+    &__label {
+        --d: 1.3rem;
+    }
+
+    &__input + label {
+        position: relative;
+        background-color: white;
+        display: block;
+        border: 3px solid $darkTextPurple;
+        width: var(--d);
+        height: var(--d);
+        border-radius: 0.2rem;
+        cursor: pointer;
+        transition: all 200ms ease;
+
+        svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0.9rem;
+            pointer-events: none;
+            path {
+                fill: none;
+                stroke: $darkTextPurple;
+                stroke-width: 0.4rem;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-dasharray: 100;
+                stroke-dashoffset: 101;
+                transition: all 250ms cubic-bezier(1, 0, 0.37, 0.91);
+            }
+        }
+    }
+
+    &__text {
+        position: absolute;
+        top: 34%;
+        left: 2.2rem;
+        font-size: 1.5rem;
+        font-weight: $bold;
+        color: $darkTextPurple;
+    }
+}
+
+// * Login Button * //
+.loginContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    &__button {
+        font-family: inherit;
+        color: white;
+        background-color: $darkTextPurple;
+        border-radius: 3rem;
+        text-align: center;
+        padding: 0.2rem 0rem;
+        outline: none;
+        text-decoration: none;
+        border: none;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: background-color 200ms ease-out, color 200ms ease-out;
+        display: inline-block;
+        min-width: 6rem;
+        width: 15%;
+    }
+
+    &__button:hover,
+    &__button:focus {
+        background-color: $darkerTextPurple;
+        color: white;
+        transition: background-color 300ms ease-in, color 300ms ease-in;
+    }
+
+    &__text {
+        display: block;
+        font-size: 1.05rem;
+        color: $normalTextBlue;
+    }
+
+    &__text::before {
+        text-decoration: underline;
+        position: absolute;
+        content: attr(data-content);
+        clip-path: polygon(0 0, 0 0, 0% 100%, 0 100%);
+        transition: clip-path 275ms ease;
+    }
+    &__text:hover::before {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
+
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .main-login {
+        .login {
+            width: 85%;
+
+            &__title {
+                font-size: 2.9rem;
+            }
+
+            &__text {
+                font-size: 1.7rem;
+            }
+        }
+
+        .loginForm {
+            width: 85%;
+        }
+
+        .loginEmail {
+            &__form {
+                font-size: 2rem;
+
+                &:placeholder-shown ~ .loginEmail__label {
+                    font-size: 2rem;
+                }
+            }
+
+            &__label {
+                font-size: 1rem;
+            }
+
+            &__form:focus {
+                ~ .loginEmail__label {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .loginPassword {
+            &__form {
+                font-size: 2rem;
+
+                &:placeholder-shown ~ .loginPassword__label {
+                    font-size: 2rem;
+                }
+            }
+
+            &__label {
+                font-size: 1rem;
+            }
+
+            &__form:focus {
+                ~ .loginPassword__label {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .rememberMeCheckbox {
+            &__text {
+                top: 27%;
+                font-size: 1.7rem;
+            }
+        }
+
+        .loginContainer {
+            &__button {
+                font-size: 1.7rem;
+            }
+
+            &__text {
+                font-size: 1.1rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1275px) {
+    .main-login {
+        .login {
+            width: 80%;
+
+            &__title {
+                font-size: 3.3rem;
+            }
+
+            &__text {
+                font-size: 2rem;
+            }
+        }
+
+        .loginForm {
+            width: 80%;
+        }
+
+        .loginEmail {
+            &__form {
+                font-size: 2.4rem;
+
+                &:placeholder-shown ~ .loginEmail__label {
+                    font-size: 2.4rem;
+                }
+            }
+
+            &__label {
+                font-size: 1rem;
+            }
+
+            &__form:focus {
+                ~ .loginEmail__label {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .loginPassword {
+            &__form {
+                font-size: 2.4rem;
+
+                &:placeholder-shown ~ .loginPassword__label {
+                    font-size: 2.4rem;
+                }
+            }
+
+            &__label {
+                font-size: 1rem;
+            }
+
+            &__form:focus {
+                ~ .loginPassword__label {
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        .rememberMeCheckbox {
+            &__label {
+                --d: 1.4rem;
+            }
+
+            &__input + label {
+                position: relative;
+                background-color: white;
+                display: block;
+                border: 3px solid $darkTextPurple;
+                width: var(--d);
+                height: var(--d);
+                border-radius: 0.2rem;
+                cursor: pointer;
+                transition: all 200ms ease;
+            }
+
+            &__text {
+                font-size: 1.9rem;
+                top: 22%;
+            }
+        }
+
+        .loginContainer {
+            margin-top: 2.5rem;
+            &__button {
+                font-size: 1.9rem;
+            }
+
+            &__text {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+// ! ------------- ! //
+// ! REGISTER PAGE ! //
+// ! ------------- ! //
+.registerButton {
+    margin-top: 2rem;
+    font-family: inherit;
+    color: white;
+    background-color: $darkTextPurple;
+    border-radius: 3rem;
+    text-align: center;
+    padding: 0.2rem 0;
+    outline: none;
+    text-decoration: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: background-color 200ms ease-out, color 200ms ease-out;
+    display: inline-block;
+    min-width: 7rem;
+    width: 20%;
+    max-width: 10rem; 
+}
+
+.registerButton:hover,
+.registerButton:focus {
+    background-color: $darkerTextPurple;
+    color: white;
+    transition: background-color 300ms ease-in, color 300ms ease-in;
+}
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .registerButton {
+        font-size: 1.8rem;
+    }
+}
+@media screen and (min-width: 1275px) {
+    .registerButton {
+        font-size: 2rem;
+    }
+    .registerFlexContainer {
+        display: flex;
+    }
+
+    #flexContainerPassword {
+        margin-top: 1rem;
+    }
+
+    #registerName, 
+    #registerPassword {
+        margin-right: 3rem;
+    }
+}
+
+// ! ------------------- ! //
+// ! RESET PASSWORD PAGE ! //
+// ! ------------------- ! //
+.resetButton {
+    margin-top: 1.5rem;
+    font-family: inherit;
+    color: white;
+    background-color: $darkTextPurple;
+    border-radius: 3rem;
+    text-align: center;
+    padding: 0.2rem 0;
+    outline: none;
+    text-decoration: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 200ms ease-out, color 200ms ease-out;
+    display: inline-block;
+    min-width: 7rem;
+    width: 20%;
+    max-width: 10rem; 
+}
+
+.resetButton:hover,
+.resetButton:focus {
+    background-color: $darkerTextPurple;
+    color: white;
+    transition: background-color 300ms ease-in, color 300ms ease-in;
+}
+@media screen and (min-width: 825px) and (max-width: 1275px) {
+    .resetButton {
+        font-size: 1.7rem;
+    }
+}
+@media screen and (min-width: 1275px) {
+    .resetButton {
+        font-size: 1.9rem;
     }
 }

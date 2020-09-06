@@ -10,6 +10,8 @@
         href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
     <title>Home - Nursing Home Mask Initiative</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <script defer src="https://unpkg.com/swup@latest/dist/swup.min.js"></script>
     <script src="../js/SwupOverlayTheme.js"></script>
     <script defer src="../js/swup.js"></script>
@@ -25,6 +27,8 @@
             <li><a href="/resources" class="not-active">Resources</a></li>
             <li><a href="/donate" class="not-active">Donate</a></li>
             <li><a href="/contact" class="not-active">Contact</a></li>
+            <li><a href="/register" id="registerButton">Register</a></li>
+            <li><a href="/login" id="loginButton">Login</a></li>
         </ul>
         <div class="menu">
             <h4>Menu</h4>
@@ -37,7 +41,7 @@
                 <p class="hero__textContainer_text">Nursing home residents and caretakers need masks. It’s up to <span
                         class="hero__textContainer_text-bold">us</span> to help.</p>
             </div>
-            <a class="hero__btn" href="/participate">Learn More</a>
+            <a class="hero__btn" href="/participate" onclick="changeNavBar('participate');">Learn More</a>
         </div>
 
         <div class="arrow">
@@ -62,29 +66,34 @@
                 <div class="getInvolved__donate_image">
                     <img src="../svg/donate.svg" alt="Piggy Bank">
                 </div>
-                <a href="/donate"><button class="getInvolved__donate_button" href="/donate"
-                        onclick="hoverNavEffects();">Donate</button></a>
+                <a href="/donate"><button class="getInvolved__donate_button"
+                        onclick="changeNavBar('donate');">Donate</button></a>
             </div>
             <div class="getInvolved__sew">
                 <div class="getInvolved__sew_image">
                     <img src="../svg/sew.svg" alt="Sewing Machine">
                 </div>
-                <a href="/participate"><button class="getInvolved__sew_button">Sew</button></a>
+                <a href="/participate"><button class="getInvolved__sew_button"
+                        onclick="changeNavBar('participate');">Sew</button></a>
             </div>
             <div class="getInvolved__learn">
                 <div class="getInvolved__learn_image">
                     <img src="../svg/learn.svg" alt="Brain">
                 </div>
-                <a href="/resources"><button class="getInvolved__learn_button">Learn</button></a>
+                <a href="/resources"><button class="getInvolved__learn_button"
+                        onclick="changeNavBar('resources');">Learn</button></a>
             </div>
         </div>
 
         <footer class="footer">
             <h2 class="footer__title">&copy Nursing Home Mask Initiative</h2>
             <div class="footer__svg">
-                <a href="#"><img src="../svg/instagram.svg" alt="Instagram Icon" class="footer__svg_instagram"></a>
-                <a href="#"><img src="../svg/twitter.svg" alt="Twitter Icon" class="footer__svg_twitter"></a>
-                <a href="#"><img src="../svg/facebook.svg" alt="Facebook Icon" class="footer__svg_facebook"></a>
+                <a href="https://www.instagram.com/covid19maskinitiative/?hl=en" target="_blank"><img
+                        src="../svg/instagram.svg" alt="Instagram Icon" class="footerMain__svg_instagram"></a>
+                <a href="https://twitter.com/covid_mask" target="_blank"><img src="../svg/twitter.svg"
+                        alt="Twitter Icon" class="footerMain__svg_twitter"></a>
+                <a href="#" target="_blank"><img src="../svg/facebook.svg" alt="Facebook Icon"
+                        class="footerMain__svg_facebook"></a>
             </div>
         </footer>
     </main>

@@ -1,27 +1,10 @@
 /**
  * Checks if Enter Zip input is only a number
  */
-const isNumber = evt => {
+const isNumber = (evt) => {
     var charCode = evt.which ? evt.which : evt.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
     return true;
-};
-
-/**
- * Creates Sweet Alert and animates it
- */
-const otherInfoAlert = evt => {
-    Swal.fire({
-        title: "Other Information",
-        html: evt.getAttribute("data-text"),
-        showClass: {
-            popup: "animate__animated animate__fadeIn animate__faster "
-        },
-        hideClass: {
-            popup: "animate__animated animate__fadeOut animate__faster"
-        },
-        confirmButtonColor: "#4b2073"
-    });
 };
 
 /**
@@ -71,7 +54,7 @@ function showPosition() {
     document.getElementById("scrollLocation").scrollIntoView(true);
 
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             fetch(
                 "https://us1.locationiq.com/v1/reverse.php?key=f27ddff8f0c0bf&lat=" +
                     position.coords.latitude +
@@ -79,7 +62,7 @@ function showPosition() {
                     position.coords.longitude +
                     "&format=json"
             ) // Call the fetch function passing the url of the API as a parameter
-                .then(function(response) {
+                .then(function (response) {
                     if (response.status !== 200) {
                         Swal.fire({
                             icon: "error",
@@ -87,37 +70,39 @@ function showPosition() {
                             text: "Status Code: " + response.status,
                             showClass: {
                                 popup:
-                                    "animate__animated animate__fadeIn animate__faster "
+                                    "animate__animated animate__fadeIn animate__faster ",
                             },
                             hideClass: {
                                 popup:
-                                    "animate__animated animate__fadeOut animate__faster"
-                            }
+                                    "animate__animated animate__fadeOut animate__faster",
+                            },
+                            confirmButtonColor: "#ff6961",
                         });
                         return;
                     }
 
                     // Examine the text in the response
-                    response.json().then(function(data) {
+                    response.json().then(function (data) {
                         postalCode = data.address.postcode;
                         input = document.getElementById("enterZip__form");
                         input.value = postalCode;
                         filterLocations();
                     });
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                     Swal.fire({
                         icon: "error",
                         title: "Error",
                         text: "Status Code: " + err,
                         showClass: {
                             popup:
-                                "animate__animated animate__fadeIn animate__faster "
+                                "animate__animated animate__fadeIn animate__faster ",
                         },
                         hideClass: {
                             popup:
-                                "animate__animated animate__fadeOut animate__faster"
-                        }
+                                "animate__animated animate__fadeOut animate__faster",
+                        },
+                        confirmButtonColor: "#ff6961",
                     });
                 });
         });
@@ -127,11 +112,75 @@ function showPosition() {
             title: "Error",
             text: "Sorry, your browser doesn't not support HTML5 Geolocation",
             showClass: {
-                popup: "animate__animated animate__fadeIn animate__faster "
+                popup: "animate__animated animate__fadeIn animate__faster ",
             },
             hideClass: {
-                popup: "animate__animated animate__fadeOut animate__faster"
-            }
+                popup: "animate__animated animate__fadeOut animate__faster",
+            },
+            confirmButtonColor: "#ff6961",
         });
     }
 }
+
+/**
+ * Changes the underline in the navbar when you click a
+ * page link that is outside of the navbar
+ * @param {*} page Page name
+ */
+const changeNavBar = (evt) => {
+    var links = document.querySelectorAll(".nav__links li a");
+    var target = "/" + evt;
+    for (var i = 0; i < links.length; i++) {
+        if (
+            !links[i].classList.contains("current") &&
+            links[i].classList.contains("active")
+        ) {
+            links[i].classList.remove("active");
+            links[i].classList.add("not-active");
+        }
+
+        if (links[i].getAttribute("href") === target) {
+            links[i].classList.remove("not-active", "current");
+            links[i].classList.add("active", "current");
+        }
+    }
+};
+
+/**
+ * Triggers alert when user presses needs masks dropped off
+ */
+const needDeliveryAlert = () => {
+    var checkbox = document.getElementById("check");
+    var checkboxArrow = document.getElementById("checkboxArrow");
+
+    if (checkbox.checked) {
+        checkboxArrow.style.visibility = "hidden";
+
+        Swal.fire({
+            title: "Are you sure?",
+            text:
+                "Only select this option if you live within 10 miles of Wexford, PA. \n Please only choose this if absolutely need to",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#1AA51A",
+            cancelButtonColor: "#FB0D00",
+            confirmButtonText: "Confirm",
+            showClass: {
+                popup: "animate__animated animate__fadeIn animate__faster ",
+            },
+            hideClass: {
+                popup: "animate__animated animate__fadeOut animate__faster",
+            },
+        }).then((result) => {
+            if (result.value) {
+                checkbox.checked = true;
+                checkboxArrow.style.visibility = "hidden";
+                setTimeout(function () {
+                    checkboxArrow.style.visibility = "visible";
+                }, 750);
+            } else {
+                checkbox.checked = false;
+            }
+        });
+    }
+};

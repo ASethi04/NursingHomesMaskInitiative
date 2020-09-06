@@ -9,6 +9,8 @@
         href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
     <title>Donate - Nursing Home Mask Initiative</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <script defer src="https://unpkg.com/swup@latest/dist/swup.min.js"></script>
     <script src="../js/SwupOverlayTheme.js"></script>
     <script defer src="../js/swup.js"></script>
@@ -24,6 +26,8 @@
             <li><a href="/resources" class="not-active">Resources</a></li>
             <li><a href="/donate" class="active">Donate</a></li>
             <li><a href="/contact" class="not-active">Contact</a></li>
+            <li><a href="/register" id="registerButton">Register</a></li>
+            <li><a href="/login" id="loginButton">Login</a></li>
         </ul>
         <div class="menu">
             <h4>Menu</h4>
@@ -47,8 +51,8 @@
                         They accept monetary donation, and donation of materials. </span></p>
                 <p class="organizations__text"><span class="organizations__text_link"><a
                             href="https://www.nndoh.org/donate.html" target="_blank"
-                            data-content="The Navajo Nation COVID-19 Fund">The
-                            Navajo Nation COVID-19 Fund</a> has been established to help the Navajo Nation respond to
+                            data-content="The Navajo Nation COVID-19 Fund">The Navajo Nation COVID-19 Fund</a> has been
+                        established to help the Navajo Nation respond to
                         the COVID-19 pandemic. </span></p>
                 <p class="organizations__text"><span class="organizations__text_link"><a
                             href="https://www.globallinks.org/donate" target="_blank" data-content="Global Links">Global
@@ -75,9 +79,12 @@
         <footer class="footerMain">
             <h2 class="footerMain__title">&copy Nursing Home Mask Initiative</h2>
             <div class="footerMain__svg">
-                <a href="#"><img src="../svg/instagram.svg" alt="Instagram Icon" class="footerMain__svg_instagram"></a>
-                <a href="#"><img src="../svg/twitter.svg" alt="Twitter Icon" class="footerMain__svg_twitter"></a>
-                <a href="#"><img src="../svg/facebook.svg" alt="Facebook Icon" class="footerMain__svg_facebook"></a>
+                <a href="https://www.instagram.com/covid19maskinitiative/?hl=en" target="_blank"><img
+                        src="../svg/instagram.svg" alt="Instagram Icon" class="footerMain__svg_instagram"></a>
+                <a href="https://twitter.com/covid_mask" target="_blank"><img src="../svg/twitter.svg"
+                        alt="Twitter Icon" class="footerMain__svg_twitter"></a>
+                <a href="#" target="_blank"><img src="../svg/facebook.svg" alt="Facebook Icon"
+                        class="footerMain__svg_facebook"></a>
             </div>
         </footer>
 

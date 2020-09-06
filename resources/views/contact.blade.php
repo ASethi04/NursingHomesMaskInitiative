@@ -26,6 +26,8 @@
             <li><a href="/resources" class="not-active">Resources</a></li>
             <li><a href="/donate" class="not-active">Donate</a></li>
             <li><a href="/contact" class="active">Contact</a></li>
+            <li><a href="/register" id="registerButton">Register</a></li>
+            <li><a href="/login" id="loginButton">Login</a></li>
         </ul>
         <div class="menu">
             <h4>Menu</h4>
@@ -50,7 +52,8 @@
                     },
                     hideClass: {
                         popup: "animate__animated animate__fadeOut animate__faster"
-                    }
+                    },
+                    confirmButtonColor: "#ff6961",
                 });
             </script>
             @endif
@@ -66,7 +69,8 @@
                     },
                     hideClass: {
                         popup: "animate__animated animate__fadeOut animate__faster"
-                    }
+                    },
+                    confirmButtonColor: "#90EE90",
                 });
             </script>
             @endif
@@ -101,9 +105,12 @@
         <footer class="footerMain">
             <h2 class="footerMain__title">&copy Nursing Home Mask Initiative</h2>
             <div class="footerMain__svg">
-                <a href="#"><img src="../svg/instagram.svg" alt="Instagram Icon" class="footerMain__svg_instagram"></a>
-                <a href="#"><img src="../svg/twitter.svg" alt="Twitter Icon" class="footerMain__svg_twitter"></a>
-                <a href="#"><img src="../svg/facebook.svg" alt="Facebook Icon" class="footerMain__svg_facebook"></a>
+                <a href="https://www.instagram.com/covid19maskinitiative/?hl=en" target="_blank"><img
+                        src="../svg/instagram.svg" alt="Instagram Icon" class="footerMain__svg_instagram"></a>
+                <a href="https://twitter.com/covid_mask" target="_blank"><img src="../svg/twitter.svg"
+                        alt="Twitter Icon" class="footerMain__svg_twitter"></a>
+                <a href="#" target="_blank"><img src="../svg/facebook.svg" alt="Facebook Icon"
+                        class="footerMain__svg_facebook"></a>
             </div>
         </footer>
         </div>

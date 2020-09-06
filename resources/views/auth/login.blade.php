@@ -1,73 +1,116 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <link rel="stylesheet" href="../css/style.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <title>Home - Nursing Home Mask Initiative</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <script defer src="https://unpkg.com/swup@latest/dist/swup.min.js"></script>
+    <script src="../js/SwupOverlayTheme.js"></script>
+    <script defer src="../js/swup.js"></script>
+</head>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<body>
+    <nav class="nav">
+        <a href="/"><img class="nav__logo" src="../img/tempLogo.png" alt="Temporary Logo"></a>
+        <ul class="nav__links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/about" class="not-active">About</a></li>
+            <li><a href="/participate" class="not-active">Participate</a></li>
+            <li><a href="/resources" class="not-active">Resources</a></li>
+            <li><a href="/donate" class="not-active">Donate</a></li>
+            <li><a href="/contact" class="not-active">Contact</a></li>
+            <li><a href="/register" id="registerButton">Register</a></li>
+            <li><a href="/login" id="loginButton">Login</a></li>
+        </ul>
+        <div class="menu">
+            <h4>Menu</h4>
         </div>
-    </div>
-</div>
-@endsection
+    </nav>
+
+    <main class="main-login" id="swup">
+        <div class="login">
+            <div class="login__title">Login</div>
+            <div class="login__text">Fill out the form to login</div>
+        </div>
+
+        <form method="POST" action="{{ route('login') }}" class="loginForm">
+            @csrf
+            <div class="loginEmail">
+                <input type="text" id="email" name="email" class="loginEmail__form @error('email') is-invalid @enderror"
+                    placeholder="Email" required value="{{ old('email') }}">
+                <label for="email" class="loginEmail__label">Email</label>
+            </div>
+
+            @error('email')
+            <script>
+                Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text:  '{{$message}}',
+                        showClass: {
+                            popup: "animate__animated animate__fadeIn animate__faster "
+                        },
+                        hideClass: {
+                            popup: "animate__animated animate__fadeOut animate__faster"
+                        },
+                        confirmButtonColor: "#ff6961",
+                    });
+            </script>
+            @enderror
+
+            <div class="loginPassword">
+                <input type="password" id="password" name="password" placeholder="Password"
+                    class="loginPassword__form @error('password') is-invalid @enderror" required
+                    value="{{ old('password') }}">
+                <label for="password" class="loginPassword__label">Password</label>
+            </div>
+
+            @error('password')
+            <script>
+                Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text:  '{{$message}}',
+                        showClass: {
+                            popup: "animate__animated animate__fadeIn animate__faster "
+                        },
+                        hideClass: {
+                            popup: "animate__animated animate__fadeOut animate__faster"
+                        },
+                        confirmButtonColor: "#ff6961",
+                    });
+            </script>
+            @enderror
+
+            <div class="rememberMeCheckbox">
+                <input type="checkbox" id="remember" class="rememberMeCheckbox__input" name="check" autocomplete="off">
+                <label for="remember" class="rememberMeCheckbox__label">
+                    <svg viewBox="0,0,50,50" id="checkboxArrow">
+                        <path d="M5 30 L 20 45 L 45 5"></path>
+                    </svg>
+                </label>
+                <span class="rememberMeCheckbox__text">Remember Me</span>
+            </div>
+
+            <div class="loginContainer">
+                <input class="loginContainer__button" type="submit" value="Login">
+
+                @if (Route::has('password.request'))
+                <a class="loginContainer__text" href="{{ route('password.request') }}">Forgot Your Password?</a>
+                @endif
+            </div>
+
+        </form>
+    </main>
+    <script src="../js/app.js"></script>
+</body>
+
+</html>
