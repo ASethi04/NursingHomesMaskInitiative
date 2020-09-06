@@ -26,8 +26,15 @@
             <li><a href="/resources" class="not-active">Resources</a></li>
             <li><a href="/donate" class="not-active">Donate</a></li>
             <li><a href="/contact" class="not-active">Contact</a></li>
+            @if(!Auth::check())
             <li><a href="/register" id="registerButton">Register</a></li>
             <li><a href="/login" id="loginButton">Login</a></li>
+            @endif
+            @if(Auth::check())
+            <form method="GET" action="{{Auth::logout()}}">
+                <li><input class="logoutButton" type="submit" value="Logout"></li>
+            </form>
+            @endif
         </ul>
         <div class="menu">
             <h4>Menu</h4>

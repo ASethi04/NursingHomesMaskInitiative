@@ -21,14 +21,21 @@
   <nav class="nav">
     <a href="/"><img class="nav__logo" src="../img/tempLogo.png" alt="Temporary Logo"></a>
     <ul class="nav__links">
-      <li><a href="/" class="active">Home</a></li>
-      <li><a href="/about" class="not-active">About</a></li>
+      <li><a href="/" class="not-active">Home</a></li>
+      <li><a href="/about" class="active">About</a></li>
       <li><a href="/participate" class="not-active">Participate</a></li>
       <li><a href="/resources" class="not-active">Resources</a></li>
       <li><a href="/donate" class="not-active">Donate</a></li>
       <li><a href="/contact" class="not-active">Contact</a></li>
+      @if(!Auth::check())
       <li><a href="/register" id="registerButton">Register</a></li>
       <li><a href="/login" id="loginButton">Login</a></li>
+      @endif
+      @if(Auth::check())
+      <form method="GET" action="{{Auth::logout()}}">
+        <li><input class="logoutButton" type="submit" value="Logout"></li>
+      </form>
+      @endif
     </ul>
     <div class="menu">
       <h4>Menu</h4>
@@ -62,13 +69,13 @@
         </div>
         <label class="customSelect" for="nhome" id="dropdownMenu">
           <select id="nhome" name="options" name="nhome">
-              @php
-              $curPageName = $_SERVER['REQUEST_URI'];
-              $page = explode('/', $curPageName);
-              $user = $page[2];
-              $nursingHome = str_replace('%20', ' ', $user);
-              @endphp
-            <option value="{{$nursingHome}}">
+            @php
+            $curPageName = $_SERVER['REQUEST_URI'];
+            $page = explode('/', $curPageName);
+            $user = $page[2];
+            $nursingHome = str_replace('%20', ' ', $user);
+            @endphp
+            <option value={{$nursingHome}}>
               {{$nursingHome}}
             </option>
             @foreach($homes as $row)

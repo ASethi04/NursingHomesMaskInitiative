@@ -24,6 +24,7 @@ Route::get('/contact', 'SendEmailController@index');
 Route::get('/user-dashboard', function() {
     return view('user-dashboard');
 });
+Route::get('/logout', 'JoinController@logout');
 
 Route::post('/contact/send', 'SendEmailController@send');
 Auth::routes();

@@ -188,7 +188,10 @@ body {
             }
 
             #loginButton,
-            #registerButton {
+            #registerButton,
+            .logoutButton {
+                font-family: inherit;
+                cursor: pointer;
                 padding: 0.2rem 0.6rem;
                 color: $normalTextPurple;
                 border: none;
@@ -204,7 +207,9 @@ body {
             #loginButton:hover,
             #registerButton:hover,
             #loginButton:focus,
-            #registerButton:focus {
+            #registerButton:focus,
+            .logoutButton:hover,
+            .logoutButton:focus {
                 color: white;
                 background-color: $normalTextPurple;
                 transition: background-color 300ms ease-in, color 300ms ease-in;
@@ -237,7 +242,7 @@ body {
 @media screen and (min-width: 1275px) {
     .nav__links {
         li {
-            a {
+            a, .logoutButton {
                 font-size: 1.5rem;
             }
         }
@@ -248,7 +253,7 @@ body {
     .nav__links {
         width: 80%;
         li {
-            a {
+            a, .logoutButton {
                 font-size: 1.3rem;
             }
         }
@@ -275,7 +280,7 @@ body {
 
             li {
                 opacity: 0;
-                a {
+                a, .logoutButton {
                     font-weight: $regular;
                     font-size: 1.3rem;
                 }

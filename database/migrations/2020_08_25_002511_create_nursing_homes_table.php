@@ -23,7 +23,7 @@ class CreateNursingHomesTable extends Migration
             $table->string('Mask Fabric');
             $table->string('Mailing Address');
             $table->string('Other Information');
-            $table->string('Passwd');
+            $table->timestamps();
         });
     }
 
